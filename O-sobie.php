@@ -9,70 +9,29 @@
 </head>
 
 <body>
+    <div class="container">
+    <nav class="community-nav">
+        <a href="#"><img src="static/images/FB_32x32.png" alt="Facebook"/></a>
+        <a href="#"><img src="static/images/IG_32x32.png" alt="Instagram"/></a>
+    </nav>
+    <div class="logo">
+    <a href="index.php"><img src="static/images/Logo.jpg" alt="Logo"/></a>
+    </div>
     <nav class="topnav">
-        <a href="index.php">HOME</a>
+        
         <a href="Kontakt.php">Kontakt</a>
         <a href="Prace.php">Prace</a>
         <a href="Usługi.php">Usługi</a>
-        <a href="O-sobie.php" style="background-color:rgba(167, 0, 22, 0.747); font-weight:bold;">O sobie</a>
+        <a href="O-sobie.php">O sobie</a>
     </nav>
-    <div class="container">
-        <div class="image">
-            <img src="static/images/hamster.jpg" alt="hamster">
-            <div class="content">
-                <a href="#">
-                    <h1>Heading</h1>
-                    <p>Projekt chomik</p>
-                </a>
-            </div>
-        </div>
-        <div class="image">
-            <img src="static/images/hamster.jpg" alt="hamster">
-            <div class="content">
-                <a href="#">
-                    <h1>Heading</h1>
-                    <p>Projekt chomik</p>
-                </a>
-            </div>
-        </div>
-        <div class="image">
-            <img src="static/images/hamster.jpg" alt="hamster">
-            <div class="content">
-                <a href="#">
-                    <h1>Heading</h1>
-                    <p>Projekt chomik</p>
-                </a>
-            </div>
-        </div>
-        <div class="image">
-            <img src="static/images/hamster.jpg" alt="hamster">
-            <div class="content">
-                <a href="#">
-                    <h1>Heading</h1>
-                    <p>Projekt chomik</p>
-                </a>
-            </div>
-        </div>
-        <div class="image">
-            <img src="static/images/hamster.jpg" alt="hamster">
-            <div class="content">
-                <a href="#">
-                    <h1>Heading</h1>
-                    <p>Projekt chomik</p>
-                </a>
-            </div>
-        </div>
-        <div class="image">
-            <img src="static/images/hamster.jpg" alt="hamster">
-            <div class="content">
-                <a href="#">
-                    <h1>Heading</h1>
-                    <p>Projekt chomik</p>
-                </a>
-            </div>
-        </div>
-    </div>
+    <section class="o-mnie">
+        <h1>Moje portfolio</h1>
+    </section>
 
+    <footer>
+
+    </footer>
+    </div>
 </body>
 
 </html>

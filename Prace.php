@@ -9,6 +9,11 @@
 </head>
 
 <body>
+    <div class="container">
+    <nav class="community-nav">
+        <a href="#"><img src="static/images/FB_32x32.png" alt="Facebook" /></a>
+        <a href="#"><img src="static/images/IG_32x32.png" alt="Instagram" /></a>
+    </nav>
     <nav class="topnav">
         <a href="index.php">HOME</a>
         <a href="Kontakt.php">Kontakt</a>
@@ -16,7 +21,7 @@
         <a href="Usługi.php">Usługi</a>
         <a href="O-sobie.php">O sobie</a>
     </nav>
-    <div class="container">
+    <div class="images-container">
         <div class="image">
             <img src="static/images/hamster.jpg" alt="hamster">
             <div class="content">
@@ -77,7 +82,7 @@
             </aside>
         </div>
     </div>
-
+    </div>
 </body>
 
 </html>
