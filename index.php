@@ -16,7 +16,15 @@
         </nav>
         <header class="header">
             <div class="logo">
-                <a href="index.php"><img src="static/images/Logo.jpg" alt="Logo" /></a>
+                <div class="logo-img"> 
+                    <a href="index.php"><img src="static/images/Logo.jpg" alt="Logo" /></a>
+                </div>
+                <div class="flag UK">
+                    <a href="#"><img src="static/images/ukraine.png" alt="Ukrainian" /></a>
+                </div>
+                <div class="flag PL">
+                    <a href="#"><img src="static/images/poland.png" alt="Polish" /></a>
+                </div>
             </div>
             <nav class="topnav">
                 <a class="link" href="Kontakt.php">Kontakt</a>

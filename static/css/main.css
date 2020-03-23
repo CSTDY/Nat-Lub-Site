@@ -18,12 +18,18 @@ body {
     height: auto;
 }
 
-.header>.logo>a>img {
+.logo>.logo-img>a>img {
     width: 100px;
 }
 
-.header>.logo {
-    width: 50%
+.logo>.flag>a>img {
+    width: 25px;
+}
+
+.logo {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: 45%
 }
 
 
