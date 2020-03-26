@@ -9,13 +9,13 @@
 </head>
 
 <body>
-    <div class="social">
+    <div class="color-bg">
         <div class="width1 right">
             <a href="#">
-                <div class="social-img" id="UK"></div>
+                <div class="flag-img" id="UK"></div>
             </a>
             <a href="#">
-                <div class="social-img" id="PL"></div>
+                <div class="flag-img" id="PL"></div>
             </a>
         </div>
     </div>
@@ -29,11 +29,10 @@
                     <h3>Twój kosmetolog</h3>
                 </a>
             </figure>
-
         </div>
     </div>
     <div class="logo-gold"></div>
-    <div class="social">
+    <div class="color-bg">
         <div class="width1">
             <nav class="topnav">
                 <a class="link" href="Kontakt.php">Kontakt</a>

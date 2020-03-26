@@ -9,13 +9,13 @@
 </head>
 
 <body>
-    <div class="social">
+    <div class="color-bg">
         <div class="width1 right">
             <a href="#">
-                <div class="social-img" id="FB"></div>
+                <div class="flag-img" id="UK"></div>
             </a>
             <a href="#">
-                <div class="social-img" id="IG"></div>
+                <div class="flag-img" id="PL"></div>
             </a>
         </div>
     </div>
@@ -24,23 +24,15 @@
         <div class="width1 flex-logo">
             <figure class="logo-container">
                 <a href="index.php">
-                    <img class="logo-img" src="static/cssIMG/images/Logo.jpg" alt="Logo">
+                    <img class="logo-img" src="static/cssIMG/images/Logo.png" alt="Logo">
                     <h3>Natalia Lubenets</h3>
                     <h3>Twój kosmetolog</h3>
                 </a>
             </figure>
-            <ul class="flags">
-                <li>
-                    <a href="#"><img src="static/cssIMG/images/ukraine.png" alt="Ukrainian" /></a>
-                </li>
-                <li>
-                    <a href="#"><img src="static/cssIMG/images/poland.png" alt="Polish" /></a>
-                </li>
-            </ul>
         </div>
     </div>
     <div class="logo-gold"></div>
-    <div class="social">
+    <div class="color-bg">
         <div class="width1">
             <nav class="topnav">
                 <a class="link" href="Kontakt.php">Kontakt</a>
