@@ -43,59 +43,53 @@
         </div>
     </div>
     <div class="images-container">
-        <div class="image">
-            <img src="static/cssIMG/images/Logo.jpg" alt="hamster">
-            <div class="content">
-                <a href="#">
+        <div class="image"><a href="#">
+                <img src="static/cssIMG/images/Logo.png" alt="hamster">
+                <div class="content">
                     <h1>Heading</h1>
                     <p>Projekt chomik</p>
-                </a>
-            </div>
+                </div>
+            </a>
         </div>
-        <div class="image">
-            <img src="static/cssIMG/images/Logo.jpg" alt="hamster">
-            <div class="content">
-                <a href="#">
+        <div class="image"><a href="#">
+                <img src="static/cssIMG/images/Logo.png" alt="hamster">
+                <div class="content">
                     <h1>Heading</h1>
                     <p>Projekt chomik</p>
-                </a>
-            </div>
+                </div>
+            </a>
         </div>
-        <div class="image">
-            <img src="static/cssIMG/images/Logo.jpg" alt="hamster">
-            <div class="content">
-                <a href="#">
+        <div class="image"><a href="#">
+                <img src="static/cssIMG/images/Logo.png" alt="hamster">
+                <div class="content">
                     <h1>Heading</h1>
                     <p>Projekt chomik</p>
-                </a>
-            </div>
+                </div>
+            </a>
         </div>
-        <div class="image">
-            <img src="static/cssIMG/images/Logo.jpg" alt="hamster">
-            <div class="content">
-                <a href="#">
+        <div class="image"><a href="#">
+                <img src="static/cssIMG/images/Logo.png" alt="hamster">
+                <div class="content">
                     <h1>Heading</h1>
                     <p>Projekt chomik</p>
-                </a>
-            </div>
+                </div>
+            </a>
         </div>
-        <div class="image">
-            <img src="static/cssIMG/images/Logo.jpg" alt="hamster">
-            <div class="content">
-                <a href="#">
+        <div class="image"><a href="#">
+                <img src="static/cssIMG/images/Logo.png" alt="hamster">
+                <div class="content">
                     <h1>Heading</h1>
                     <p>Projekt chomik</p>
-                </a>
-            </div>
+                </div>
+            </a>
         </div>
-        <div class="image">
-            <img src="static/cssIMG/images/Logo.jpg" alt="hamster">
-            <div class="content">
-                <a href="#">
+        <div class="image"><a href="#">
+                <img src="static/cssIMG/images/Logo.png" alt="hamster">
+                <div class="content">
                     <h1>Heading</h1>
                     <p>Projekt chomik</p>
-                </a>
-            </div>
+                </div>
+            </a>
         </div>
         <div class="adds">
             <aside>

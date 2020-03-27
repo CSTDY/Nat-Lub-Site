@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="static/cssIMG/main.css" type="text/css" />
     <title>Portfolio</title>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Pinyon+Script" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -42,13 +43,24 @@
             </nav>
         </div>
     </div>
-    <div class="slajd-img">
-
+    <div class="home-slider">
+        <img src="static/cssIMG/images/ukraine.png" alt="Poland" class="slajd-img">
+        <img src="static/cssIMG/images/Logo.png" alt="Poland" class="slajd-img">
+        <img src="static/cssIMG/images/poland.png" alt="Poland" class="slajd-img">
+        <img src="static/cssIMG/images/kolor.jpg" alt="Poland" class="slajd-img">
+        <div class="content">
+            <button class="demo" onclick="currentDiv(1)">1</button>
+            <button class="demo" onclick="currentDiv(2)">2</button>
+            <button class="demo" onclick="currentDiv(3)">3</button>
+            <button class="demo" onclick="currentDiv(4)">4</button>
+        </div>
+        <a class="slajd-btn-left" onclick="Slajd_plus(-1)">Poprzednie</a>
+        <a class="slajd-btn-right" onclick="Slajd_plus(1)">Następne</a>
     </div>
-
     <footer>
 
     </footer>
+    <script src="static/JS/main.js"></script>
 </body>
 
 </html>
