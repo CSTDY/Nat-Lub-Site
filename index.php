@@ -42,9 +42,9 @@
             </nav>
         </div>
     </div>
-    <section class="o-mnie width1">
-        <h1>Moje portfolio</h1>
-    </section>
+    <div class="slajd-img">
+
+    </div>
 
     <footer>
 

@@ -65,13 +65,13 @@ ul {
 }
 
 .logo-container {
-    width: 150px;
+    width: 250px;
     font-family: "Pinyon Script";
     text-align: center;
 }
 
 .logo-img {
-    width: 100px;
+    width: 150px;
     margin: 8px 0 0 0;
 }
 
@@ -106,8 +106,13 @@ ul {
     color: rgb(180, 178, 178);
 }
 
+/*Slajdy 'index.php'*/
 
-/*Site 'Prace.php''*/
+.slajd-img {
+    
+}
+
+/*postet images at 'Prace.php'*/
 
 .images-container {
     display: inline-grid;
@@ -116,9 +121,6 @@ ul {
     margin-right: 5%;
     padding: 5%;
 }
-
-
-/*postet images at 'Prace.php'*/
 
 .image {
     overflow: hidden;
