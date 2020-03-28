@@ -42,8 +42,43 @@
             </nav>
         </div>
     </div>
-    <section class="o-mnie width1">
-        <h1>Moje portfolio</h1>
+    <section class="contact">
+        <div class="width1">
+            <div class="form">
+                <table class="form-table" cellpadding="4" cellspacing="0">
+                    <colgroup>
+                        <col width="55%">
+                        <col width="45%">
+                    </colgroup>
+                    <tbody>
+                        <tr class="text-position">
+                            <td width="45%">
+                                <h3>Zapraszam do kontaktu</h3>
+                                <p></p>
+                                <p>Natalialubenetskosmetolog@gmail.com</p>
+                                <p></p>
+                                <p>Tel. 664 759 524</p>
+                                <p></p>
+                                <p>Rotmanka</p>
+                                </br></br></br>
+                                <p>Na maile odpowiadam w ciągu 24h. 
+                                    Aby otrzymać szybszą odpowiedź proszę o kontakt telefoniczny. Dziękuję!</p>
+                                <p></p>
+                                <a href="#">
+                                    <div class="flag-img" id="FB"></div>
+                                </a>
+                                <a href="#">
+                                    <div class="flag-img" id="IG"></div>
+                                </a>
+                            </td>
+                            <td width="55%">
+                                <input type="text" name="imie" placeholder="name">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </section>
 
     <footer>

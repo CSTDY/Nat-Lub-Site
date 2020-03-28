@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <!--LOGO-->
     <div class="color-bg">
         <div class="width1 right">
             <a href="#">
@@ -43,19 +44,20 @@
             </nav>
         </div>
     </div>
+    <!--SLIDER-->
     <div class="home-slider">
         <img src="static/cssIMG/images/ukraine.png" alt="Poland" class="slajd-img">
         <img src="static/cssIMG/images/Logo.png" alt="Poland" class="slajd-img">
         <img src="static/cssIMG/images/poland.png" alt="Poland" class="slajd-img">
         <img src="static/cssIMG/images/kolor.jpg" alt="Poland" class="slajd-img">
         <div class="content">
-            <button class="demo" onclick="currentDiv(1)">1</button>
-            <button class="demo" onclick="currentDiv(2)">2</button>
-            <button class="demo" onclick="currentDiv(3)">3</button>
-            <button class="demo" onclick="currentDiv(4)">4</button>
+            <button class="btn" onclick="currentDiv(1)">1</button>
+            <button class="btn" onclick="currentDiv(2)">2</button>
+            <button class="btn" onclick="currentDiv(3)">3</button>
+            <button class="btn" onclick="currentDiv(4)">4</button>
         </div>
-        <a class="slajd-btn-left" onclick="Slajd_plus(-1)">Poprzednie</a>
-        <a class="slajd-btn-right" onclick="Slajd_plus(1)">Następne</a>
+        <a class="btn slajd-btn-left" onclick="Slajd_plus(-1)">Poprzednie</a>
+        <a class="btn slajd-btn-right" onclick="Slajd_plus(1)">Następne</a>
     </div>
     <footer>
 

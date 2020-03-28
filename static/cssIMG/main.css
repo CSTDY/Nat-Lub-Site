@@ -18,7 +18,7 @@ ul {
 
 
 .width1 {
-    width: 90%;
+    width: 70%;
     margin: 0 auto;
 }
 
@@ -106,20 +106,24 @@ ul {
     color: rgb(180, 178, 178);
 }
 
-/*Slajdy 'index.php'*/
+/*Slider 'index.php'*/
 
 .home-slider {
     text-align: center;
     width: 50%;
     height: 500px;
-    margin: 50px auto 0 auto;
+    margin: 50px auto;
 }
 
-.home-slider>img {
+.home-slider>.slajd-img {
     width: 100%;
     height: 100%;
     margin: 0 0 30px 0;
     object-fit: cover;
+}
+
+.btn {
+    cursor: pointer;
 }
 
 
@@ -153,6 +157,39 @@ ul {
 
 .content {
     color: rgba(243, 241, 241, 0.89);
+}
+
+/*Kontakt.php */
+
+.contact {
+    margin: 50px 0 0 0;
+}
+
+.form {
+    line-height: 1.5;
+    border: 2px double rgba(167, 0, 22, 0.747);
+    padding: 20px 20px 0 20px;
+    font-family: "Gabriela', serif ";
+}
+
+.form-table {
+    height: 450px;
+    width: 700px;
+}
+
+.text-position {
+    vertical-align: top;
+    font-size: 1.1em;
+}
+
+#FB {
+    background-image: url("images/FB_32x32.png");
+    background-size: cover;
+}
+
+#IG {
+    background-image: url("images/IG_32x32.png");
+    background-size: cover;
 }
 
 /*MOBILE AND TABLET*/
