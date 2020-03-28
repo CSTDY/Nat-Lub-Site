@@ -61,25 +61,23 @@ ul {
     background-image: 
     linear-gradient(to right, rgba(212, 70, 51, 0.788), rgb(247, 242, 242),
      rgb(247, 242, 242), rgb(247, 242, 242), rgb(247, 242, 242),
-     rgb(247, 242, 242), rgb(247, 242, 242),  rgba(212, 70, 51, 0.788));
-}
-
-.logo-container {
-    width: 250px;
-    font-family: "Pinyon Script";
-    text-align: center;
-}
-
-.logo-img {
-    width: 150px;
-    margin: 8px 0 0 0;
+     rgba(212, 70, 51, 0.788));
 }
 
 .flex-logo {
     display: flex;
-    align-items: center;
-    font-size: 1.2em;
-    justify-content: center;
+    font-family: "Pinyon Script";
+    font-size: 3em;
+}
+
+.flex-logo>div {
+    align-self: center;
+    margin: 0 0 0 18%;
+}
+
+.logo-img {
+    width: 250px;
+    margin: 8px 0 0 0;
 }
 
 .logo-gold {
@@ -127,13 +125,14 @@ ul {
 }
 
 
-/*postet images at 'Prace.php'*/
+/*posted images at 'Uslugi.php' and "Prace.php*/
 
 .images-container {
     display: inline-grid;
     grid-template-columns: auto auto auto;
     grid-gap: 10px;
-    margin-right: 5%;
+    border: 2px double rgba(167, 0, 22, 0.747);
+    margin: 50px 5% 0 0;
     padding: 5%;
 }
 
@@ -166,20 +165,45 @@ ul {
 }
 
 .form {
-    line-height: 1.5;
     border: 2px double rgba(167, 0, 22, 0.747);
     padding: 20px 20px 0 20px;
     font-family: "Gabriela', serif ";
 }
 
 .form-table {
-    height: 450px;
-    width: 700px;
+    display: grid;
+    grid-template-columns: 45% 55%;
+    grid-gap: 15px;
+    margin: 0 20px 20px 20px;
+    height: auto;
 }
 
 .text-position {
     vertical-align: top;
     font-size: 1.1em;
+}
+
+form>.form-cell-width {
+    width: 60%;
+}
+
+form>.form-person-data {
+    height: 30px;
+}
+
+form>.form-message {
+    resize: none;
+    height: 150px;
+}
+
+form>.form-submit-btn {
+    height: 30px;
+    background-color: rgba(99, 78, 87, 0.651);
+    text-align: center;
+}
+
+.tel {
+    font-weight: bold;
 }
 
 #FB {
@@ -192,16 +216,56 @@ ul {
     background-size: cover;
 }
 
+/*O-sobie.php*/
+.o-sobie {
+    border: 2px double rgba(167, 0, 22, 0.747);
+    margin: 50px 5% 0 0;
+    padding: 5%;
+}
+
 /*MOBILE AND TABLET*/
 
-@media (max-width: 1024px) {
+@media (max-width: 1124px) {
+    /*Prace.php*/
     .images-container {
         grid-template-columns: auto auto;
     }
+    /*LOGO*/
+    .flex-logo {
+        display: flex;
+        align-items: center;
+        font-size: 2em;
+        justify-content: center;
+    }
+
+    .logo-img {
+        width: 200px;
+        margin: 8px 0 0 0;
+    }
+    /*Kontakt.php*/
+    .form-table {
+        display: grid;
+        grid-template-columns: auto;
+        margin: 0 20px 20px 20px;
+        height: auto;
+    }
+
 }
 
-@media (max-width: 640px) {
+@media (max-width: 800px) {
     .images-container {
         grid-template-columns: auto;
+    }
+    /*LOGO*/
+    .flex-logo {
+        display: flex;
+        align-items: center;
+        font-size: 1em;
+        justify-content: center;
+    }
+
+    .logo-img {
+        width: 150px;
+        margin: 8px 0 0 0;
     }
 }

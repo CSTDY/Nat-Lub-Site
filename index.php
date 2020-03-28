@@ -23,15 +23,13 @@
     </div>
     <div class="logo-gold"></div>
     <div class="header">
-        <div class="width1 flex-logo">
-            <figure class="logo-container">
-                <a href="index.php">
-                    <img class="logo-img" src="static/cssIMG/images/Logo.png" alt="Logo">
-                    <h3>Natalia Lubenets</h3>
-                    <h3>Twój kosmetolog</h3>
-                </a>
-            </figure>
-        </div>
+        <figure class=" width1 flex-logo">
+            <a href="index.php"><img class="logo-img" src="static/cssIMG/images/Logo.png" alt="Logo"></a>
+            <div>
+                <h3>Natalia Lubenets</h3>
+                <h3>Twój kosmetolog</h3>
+            </div>
+        </figure>
     </div>
     <div class="logo-gold"></div>
     <div class="color-bg">

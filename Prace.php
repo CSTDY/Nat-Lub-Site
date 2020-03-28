@@ -21,15 +21,13 @@
     </div>
     <div class="logo-gold"></div>
     <div class="header">
-        <div class="width1 flex-logo">
-            <figure class="logo-container">
-                <a href="index.php">
-                    <img class="logo-img" src="static/cssIMG/images/Logo.png" alt="Logo">
-                    <h3>Natalia Lubenets</h3>
-                    <h3>Twój kosmetolog</h3>
-                </a>
-            </figure>
-        </div>
+        <figure class=" width1 flex-logo">
+            <a href="index.php"><img class="logo-img" src="static/cssIMG/images/Logo.png" alt="Logo"></a>
+            <div>
+                <h3>Natalia Lubenets</h3>
+                <h3>Twój kosmetolog</h3>
+            </div>
+        </figure>
     </div>
     <div class="logo-gold"></div>
     <div class="color-bg">
@@ -42,59 +40,44 @@
             </nav>
         </div>
     </div>
-    <div class="images-container">
-        <div class="image"><a href="#">
-                <img src="static/cssIMG/images/Logo.png" alt="hamster">
-                <div class="content">
-                    <h1>Heading</h1>
-                    <p>Projekt chomik</p>
-                </div>
-            </a>
-        </div>
-        <div class="image"><a href="#">
-                <img src="static/cssIMG/images/Logo.png" alt="hamster">
-                <div class="content">
-                    <h1>Heading</h1>
-                    <p>Projekt chomik</p>
-                </div>
-            </a>
-        </div>
-        <div class="image"><a href="#">
-                <img src="static/cssIMG/images/Logo.png" alt="hamster">
-                <div class="content">
-                    <h1>Heading</h1>
-                    <p>Projekt chomik</p>
-                </div>
-            </a>
-        </div>
-        <div class="image"><a href="#">
-                <img src="static/cssIMG/images/Logo.png" alt="hamster">
-                <div class="content">
-                    <h1>Heading</h1>
-                    <p>Projekt chomik</p>
-                </div>
-            </a>
-        </div>
-        <div class="image"><a href="#">
-                <img src="static/cssIMG/images/Logo.png" alt="hamster">
-                <div class="content">
-                    <h1>Heading</h1>
-                    <p>Projekt chomik</p>
-                </div>
-            </a>
-        </div>
-        <div class="image"><a href="#">
-                <img src="static/cssIMG/images/Logo.png" alt="hamster">
-                <div class="content">
-                    <h1>Heading</h1>
-                    <p>Projekt chomik</p>
-                </div>
-            </a>
-        </div>
-        <div class="adds">
-            <aside>
+    <div class="width1">
+        <div class="images-container">
+            <div class="image">
+                <a href="#">
+                    <img src="static/cssIMG/images/Logo.png" alt="hamster">
 
-            </aside>
+                </a>
+            </div>
+            <div class="image"><a href="#">
+                    <img src="static/cssIMG/images/Logo.png" alt="hamster">
+
+                </a>
+            </div>
+            <div class="image"><a href="#">
+                    <img src="static/cssIMG/images/Logo.png" alt="hamster">
+
+                </a>
+            </div>
+            <div class="image"><a href="#">
+                    <img src="static/cssIMG/images/Logo.png" alt="hamster">
+
+                </a>
+            </div>
+            <div class="image"><a href="#">
+                    <img src="static/cssIMG/images/Logo.png" alt="hamster">
+
+                </a>
+            </div>
+            <div class="image"><a href="#">
+                    <img src="static/cssIMG/images/Logo.png" alt="hamster">
+
+                </a>
+            </div>
+            <div class="adds">
+                <aside>
+
+                </aside>
+            </div>
         </div>
     </div>
     </div>
