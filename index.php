@@ -4,14 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="static/cssIMG/main.css" type="text/css" />
-    <title>Portfolio</title>
+    <title>NatLubSite</title>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Pinyon+Script" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <style>
-.mySlides {display:none}
-.w3-left, .w3-right, .w3-badge {cursor:pointer}
-.w3-badge {height:13px;width:13px;padding:0}
-</style>
 </head>
 
 <body>
