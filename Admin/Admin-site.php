@@ -10,13 +10,18 @@
 </head>
 
 <body>
-    <div class="Admin-Login">
-        <form method="POST">
-            <input type="text" name="Admin" placeholder="Admin"></br></br>
-            <input type="password" name="pass" placeholder="Hasło"></br></br>
-            <input type="submit" name="sub-btn" value="Zaloguj się">
-        </form>
+    <div class="container">
+        <div class="topnav">
+            <div class="width1">
+                <div>
+                    <p>Tekst</p>
+                </div>
+            </div>
+        </div>
     </div>
+    <footer>
+
+    </footer>
     <script src="Admin-static/JS/Admin.js"></script>
 </body>
 

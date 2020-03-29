@@ -43,16 +43,16 @@
         </div>
     </div>
     <!--SLIDER-->
-    <div class="home-slider" style="max-width:800px">
-        <img class="slajd-img" src="static/cssIMG/images/Logo.png" >
-        <img class="slajd-img" src="static/cssIMG/images/poland.png" >
-        <img class="slajd-img" src="static/cssIMG/images/kolor.jpg" >
+    <div class="home-slider">
+        <img class="slajd-img" src="static/cssIMG/images/Logo.png">
+        <img class="slajd-img" src="static/cssIMG/images/poland.png">
+        <img class="slajd-img" src="static/cssIMG/images/kolor.jpg">
         <div class="slajd-bar">
-            <div  class="slajd-item" onclick="Slajd_plus(-1)">&#10094;</div>
+            <div class="slajd-item" onclick="Slajd_plus(-1)">&#10094;</div>
             <span class="slajd-item" onclick="currentDiv(1)">1</span>
             <span class="slajd-item" onclick="currentDiv(2)">2</span>
             <span class="slajd-item" onclick="currentDiv(3)">3</span>
-            <div  class="slajd-item" onclick="Slajd_plus(1)">&#10095;</div>
+            <div class="slajd-item" onclick="Slajd_plus(1)">&#10095;</div>
         </div>
     </div>
     <footer>
