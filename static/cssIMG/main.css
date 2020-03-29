@@ -1,6 +1,9 @@
 * {
     box-sizing: border-box;
 }
+html, body {
+    height: 100%;
+}
 
 body {
     margin: 0;
@@ -16,10 +19,34 @@ ul {
     list-style: none;
 }
 
-
 .width1 {
     width: 70%;
     margin: 0 auto;
+}
+
+/*Positioning footer at the bottom*/
+.container {
+    min-height: 100%;
+}
+
+.page-container {
+    overflow: auto;
+    padding-bottom: 50px;
+}
+
+footer {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    color: rgba(230, 225, 225, 0.973);
+    text-align: center;
+    margin: 50px 0 0 0;
+    background-image: url("images/kolor.jpg");
+    clear: both;
+}
+
+footer>p {
+    display: inline-block;
 }
 
 /*Community-nav */
@@ -221,6 +248,7 @@ form>.form-submit-btn {
     border: 2px double rgba(167, 0, 22, 0.747);
     margin: 50px 5% 0 0;
     padding: 5%;
+    
 }
 
 /*MOBILE AND TABLET*/
