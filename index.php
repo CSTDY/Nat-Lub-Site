@@ -7,6 +7,11 @@
     <title>Portfolio</title>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Pinyon+Script" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+.mySlides {display:none}
+.w3-left, .w3-right, .w3-badge {cursor:pointer}
+.w3-badge {height:13px;width:13px;padding:0}
+</style>
 </head>
 
 <body>
@@ -43,19 +48,17 @@
         </div>
     </div>
     <!--SLIDER-->
-    <div class="home-slider">
-        <img src="static/cssIMG/images/ukraine.png" alt="Poland" class="slajd-img">
-        <img src="static/cssIMG/images/Logo.png" alt="Poland" class="slajd-img">
-        <img src="static/cssIMG/images/poland.png" alt="Poland" class="slajd-img">
-        <img src="static/cssIMG/images/kolor.jpg" alt="Poland" class="slajd-img">
-        <div class="content">
-            <button class="btn" onclick="currentDiv(1)">1</button>
-            <button class="btn" onclick="currentDiv(2)">2</button>
-            <button class="btn" onclick="currentDiv(3)">3</button>
-            <button class="btn" onclick="currentDiv(4)">4</button>
+    <div class="home-slider" style="max-width:800px">
+        <img class="slajd-img" src="static/cssIMG/images/Logo.png" >
+        <img class="slajd-img" src="static/cssIMG/images/poland.png" >
+        <img class="slajd-img" src="static/cssIMG/images/kolor.jpg" >
+        <div class="slajd-bar">
+            <div  class="slajd-item" onclick="Slajd_plus(-1)">&#10094;</div>
+            <span class="slajd-item" onclick="currentDiv(1)">1</span>
+            <span class="slajd-item" onclick="currentDiv(2)">2</span>
+            <span class="slajd-item" onclick="currentDiv(3)">3</span>
+            <div  class="slajd-item" onclick="Slajd_plus(1)">&#10095;</div>
         </div>
-        <a class="btn slajd-btn-left" onclick="Slajd_plus(-1)">Poprzednie</a>
-        <a class="btn slajd-btn-right" onclick="Slajd_plus(1)">Następne</a>
     </div>
     <footer>
         <p>&copy Natalia Lubenets Twój Kosmetolog <?php echo date('Y'); ?></p>

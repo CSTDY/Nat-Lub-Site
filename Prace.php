@@ -45,7 +45,6 @@
             <div class="image">
                 <a href="#">
                     <img src="static/cssIMG/images/Logo.png" alt="hamster">
-
                 </a>
             </div>
             <div class="image"><a href="#">

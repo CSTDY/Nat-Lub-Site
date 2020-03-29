@@ -137,17 +137,29 @@ footer>p {
     text-align: center;
     width: 50%;
     height: 500px;
-    margin: 50px auto;
+    margin: 50px auto 0 auto;
+    padding: 20px auto;
+    border: 2px double rgba(167, 0, 22, 0.747);
 }
 
-.home-slider>.slajd-img {
+.slajd-img {
     width: 100%;
     height: 100%;
-    margin: 0 0 30px 0;
     object-fit: cover;
+    position: relative;
+    vertical-align: middle;
 }
 
-.btn {
+
+.slajd-bar {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: -15%;
+}
+.slajd-bar>.slajd-item {
     cursor: pointer;
 }
 
