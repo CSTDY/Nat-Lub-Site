@@ -7,8 +7,14 @@ html, body {
 }
 
 body {
+    background-color: rgba(116, 114, 114, 0.973);
     margin: 0;
     line-height: 1.4em;
+}
+
+a {
+    text-decoration: none;
+    color: rgba(168, 167, 167, 0.973);
 }
 
 /*ADMIN index.php*/
@@ -31,10 +37,10 @@ footer {
     position: relative;
     height: 50px;
     width: 100%;
-    color: rgba(230, 225, 225, 0.973);
+    color: rgba(37, 37, 37, 0.973);
     text-align: center;
     margin: 50px 0 0 0;
-    background-color: sandybrown;
+    background-color: rgba(168, 167, 167, 0.973);
     clear: both;
 }
 
@@ -46,7 +52,29 @@ footer>p {
 
 .topnav {
     width: 100%;
-    height: 50px;
+    height: auto;
     top: 0;
-    background-color: sandybrown;
+    background-color: rgba(37, 37, 37, 0.973);
+}
+
+.width1 {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.topnav-menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.topnav-item .topnav-menu-item {
+    font-size: 1.2em;
+    color: rgba(230, 225, 225, 0.973);
+    padding: 14px 15px;
+}
+
+/*Site content*/
+
+.content {
+    margin: 50px 0 0 0;
 }
