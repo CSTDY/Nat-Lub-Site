@@ -40,7 +40,7 @@
             </nav>
         </div>
     </div>
-    <div class="width1">
+    <div class="width1"> <!-- Załadowanie max 9 prac na jednej stronie. Reszta na pozostałych-->
         <div class="images-container">
             <div class="image">
                 <a href="#">

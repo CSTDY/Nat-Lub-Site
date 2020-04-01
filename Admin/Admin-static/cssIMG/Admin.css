@@ -78,3 +78,27 @@ footer>p {
 .content {
     margin: 50px 0 0 0;
 }
+
+/*Add work and Add new service section*/
+
+.grid-box {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 15px;
+}
+
+.box {
+    border: 2px double rgba(56, 55, 55, 0.973);
+    padding: 0 15px 50px 15px;
+}
+
+
+/*TABLETS AND PHONES*/
+
+@media (max-width: 1124px) {
+    /*Admin-site.php*/
+    .grid-box {
+        display: grid;
+        grid-template-columns: auto;
+    }
+}

@@ -214,11 +214,6 @@ footer>p {
     height: auto;
 }
 
-.text-position {
-    vertical-align: top;
-    font-size: 1.1em;
-}
-
 form>.form-cell-width {
     width: 60%;
 }

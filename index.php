@@ -34,8 +34,8 @@
     <div class="logo-gold"></div>
     <div class="color-bg">
         <div class="width1">
-            <nav class="topnav">
-                <a class="link" href="Kontakt.php">Kontakt</a>
+            <nav class="topnav"> 
+                <a class="link" href="Kontakt.php">Kontakt</a> 
                 <a class="link" href="Prace.php">Prace</a>
                 <a class="link" href="Usługi.php">Usługi</a>
                 <a class="link" href="O-sobie.php">O sobie</a>
@@ -43,7 +43,7 @@
         </div>
     </div>
     <!--SLIDER-->
-    <div class="home-slider">
+    <div class="home-slider"> <!--Załadowanie funkcją max 10 ostatnich publikacji-->
         <img class="slajd-img" src="static/cssIMG/images/Logo.png">
         <img class="slajd-img" src="static/cssIMG/images/poland.png">
         <img class="slajd-img" src="static/cssIMG/images/kolor.jpg">

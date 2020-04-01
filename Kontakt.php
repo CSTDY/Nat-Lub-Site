@@ -45,7 +45,6 @@
             <div class="form">
                 <!--form table-->
                 <div class="form-table">
-                    <tr class="text-position">
                         <div class="form-col1">
                             <h3>Zapraszam do kontaktu</h3>
                             <p></p>

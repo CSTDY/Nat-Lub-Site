@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="width1">
-                <div class="o-sobie">
+                <div class="o-sobie"> <!--Funkcja pobiera treść z bazy-->
 
                 </div>
             </div>

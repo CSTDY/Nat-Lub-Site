@@ -40,7 +40,7 @@
             </nav>
         </div>
     </div>
-    <div class="width1">
+    <div class="width1"> <!--Funkcja pobierająca menu z bazy-->
         <div class="images-container">
             <div class="image">
                 <a href="#">
