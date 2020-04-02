@@ -1,47 +1,12 @@
-<!DOCTYPE html>
-<html lang="pl">
-
-<head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="static/cssIMG/main.css" type="text/css" />
-    <title>NatLubSite</title>
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Pinyon+Script" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<?php 
+    include_once("Includes/Head-section.php");
+?>
 </head>
-
 <body>
     <!--LOGO-->
-    <div class="color-bg">
-        <div class="width1 right">
-            <a href="#">
-                <div class="flag-img" id="UK"></div>
-            </a>
-            <a href="#">
-                <div class="flag-img" id="PL"></div>
-            </a>
-        </div>
-    </div>
-    <div class="logo-gold"></div>
-    <div class="header">
-        <figure class=" width1 flex-logo">
-            <a href="index.php"><img class="logo-img" src="static/cssIMG/images/Logo.png" alt="Logo"></a>
-            <div>
-                <h3>Natalia Lubenets</h3>
-                <h3>Twój kosmetolog</h3>
-            </div>
-        </figure>
-    </div>
-    <div class="logo-gold"></div>
-    <div class="color-bg">
-        <div class="width1">
-            <nav class="topnav"> 
-                <a class="link" href="Kontakt.php">Kontakt</a> 
-                <a class="link" href="Prace.php">Prace</a>
-                <a class="link" href="Usługi.php">Usługi</a>
-                <a class="link" href="O-sobie.php">O sobie</a>
-            </nav>
-        </div>
-    </div>
+    <?php 
+        include_once("Includes/Logo-section.php");
+    ?>
     <!--SLIDER-->
     <div class="home-slider"> <!--Załadowanie funkcją max 10 ostatnich publikacji-->
         <img class="slajd-img" src="static/cssIMG/images/Logo.png">

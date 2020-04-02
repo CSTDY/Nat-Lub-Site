@@ -251,7 +251,7 @@ form>.form-submit-btn {
 .o-sobie {
     border: 2px double rgba(167, 0, 22, 0.747);
     margin: 50px 5% 0 0;
-    padding: 5%;
+    padding: 5%;height: auto;
     
 }
 
