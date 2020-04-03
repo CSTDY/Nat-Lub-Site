@@ -248,11 +248,11 @@ form>.form-submit-btn {
 }
 
 /*O-sobie.php*/
-.o-sobie {
+.border1 {
     border: 2px double rgba(167, 0, 22, 0.747);
     margin: 50px 5% 0 0;
-    padding: 5%;height: auto;
-    
+    padding: 5%;
+    height: auto;
 }
 
 /*MOBILE AND TABLET*/
