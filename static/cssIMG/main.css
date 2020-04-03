@@ -24,6 +24,14 @@ ul {
     margin: 0 auto;
 }
 
+.border1 {
+    border: 2px double rgba(167, 0, 22, 0.747);
+    margin: 50px 5% 0 0;
+    padding: 5%;
+    height: auto;
+    font-size: 1.2em;
+}
+
 /*Positioning footer at the bottom*/
 .container {
     min-height: 100%;
@@ -247,12 +255,9 @@ form>.form-submit-btn {
     background-size: cover;
 }
 
-/*O-sobie.php*/
-.border1 {
-    border: 2px double rgba(167, 0, 22, 0.747);
-    margin: 50px 5% 0 0;
-    padding: 5%;
-    height: auto;
+/*Usługi.php*/
+.Uslugi-text-align {
+    text-align: center;
 }
 
 /*MOBILE AND TABLET*/
