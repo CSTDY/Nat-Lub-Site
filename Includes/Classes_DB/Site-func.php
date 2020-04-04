@@ -2,6 +2,7 @@
 class Upload_content {
 
     private $sql;
+    private $sql_extra;
     private function No_conditon_query($data_location) {
         $this->sql = "SELECT * FROM $data_location";
     } 
@@ -25,11 +26,6 @@ class Upload_content {
         $this->sql = "SELECT section, subsection, content, price FROM $location";
     }
 
-    private function Uslugi_OUT($result) {
-        echo "<h3>".$result['section']."</h3>";
-        echo "<h4>".$result['subsection']."</h4>";
-        echo "<p>*".$result['content'].": ".$result['price']."zł</p>";
-    }
     //Results
     function get_result() {
         require_once("Connect-path.php");
@@ -41,9 +37,11 @@ class Upload_content {
             $conn -> query ('SET CHARACTER_SET utf8_unicode_ci');
             //
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
             $stmt = $conn->prepare($this->sql);
-            $stmt->execute();
 
+            $stmt->execute();
+            $col_val_assignment;
             //O-sobie.php
             if($this->checker_O_sobie) {
                 $result = $stmt->fetch();
@@ -55,20 +53,36 @@ class Upload_content {
             if($this->checker_Uslugi) {
                 $this->checker_Uslugi = false;
                 //
-                $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                $count = 1; //test var
+                // Uslugi columns name
+                $uslugi_col_name = $conn->prepare("SELECT section FROM services");
+                $uslugi_col_name->execute();
+                $uslugi_col_name->setFetchMode(PDO::FETCH_ASSOC);
+                //
+                $uslugi_col_name_array = array();
+                foreach(new TableRows(new RecursiveArrayIterator($uslugi_col_name->fetchAll())) as $k=>$v) {
+                    $uslugi_col_name_array[] = $v;
+                }
+                
+                    print_r(array_values($uslugi_col_name_array));
+                
+                //
+                //check witch values belongs to witch columns
+                
+                //test var
                 /********************QUERY THAT TAKES COLUMNS NAME!!!!!! **********************/
                 // SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'services' ORDER BY ORDINAL_POSITION
+                $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $count = 0; 
                 foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
-                    if($count == 1) {
+                    
+                    if($v == $uslugi_col_name_array[$count] ) {
                         echo '<h3 class="Uslugi-text-align">'.$v."</h3>";
-                        $count++;
+                        $count++; 
+                        if($count>=sizeof($uslugi_col_name_array)) {
+                            $count = 0;
+                        }
                     }
-                    else if($count == 2) {
-                        echo '<h4>'.$v."</h4>";
-                        $count++;
-                    }
-                    else {
+                    else  {
                         echo "<p>*".$v."</p>";
                     }
                 }
@@ -77,7 +91,7 @@ class Upload_content {
         catch(PDOException $e) {
             echo "Connected failed: ".$e->getMessage();
         }
-        
+        $conn = null;
     }
 }
 
@@ -90,10 +104,8 @@ class TableRows extends RecursiveIteratorIterator {
     }
 
     function current() {
-            return parent::current();
-        
+        return parent::current();
     }
-
 }
 
 define ('ROOT_PATH', realpath(dirname(__FILE__)));
