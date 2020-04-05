@@ -23,7 +23,7 @@ class Upload_content {
 
     function Uslugi($location) {
         $this->checker_Uslugi = true;
-        $this->sql = "SELECT section, subsection, content, price FROM $location";
+        $this->sql = "SELECT section FROM $location";
     }
 
     //Results
@@ -41,7 +41,6 @@ class Upload_content {
             $stmt = $conn->prepare($this->sql);
 
             $stmt->execute();
-            $col_val_assignment;
             //O-sobie.php
             if($this->checker_O_sobie) {
                 $result = $stmt->fetch();
@@ -54,38 +53,44 @@ class Upload_content {
                 $this->checker_Uslugi = false;
                 //
                 // Uslugi columns name
-                $uslugi_col_name = $conn->prepare("SELECT section FROM services");
-                $uslugi_col_name->execute();
-                $uslugi_col_name->setFetchMode(PDO::FETCH_ASSOC);
                 //
-                $uslugi_col_name_array = array();
-                foreach(new TableRows(new RecursiveArrayIterator($uslugi_col_name->fetchAll())) as $k=>$v) {
-                    $uslugi_col_name_array[] = $v;
+                $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $section_array = array();
+                foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
+                    $section_array[] = $v;
                 }
                 
-                    print_r(array_values($uslugi_col_name_array));
+                print_r(array_values($section_array));
                 
                 //
                 //check witch values belongs to witch columns
                 
-                //test var
                 /********************QUERY THAT TAKES COLUMNS NAME!!!!!! **********************/
                 // SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'services' ORDER BY ORDINAL_POSITION
-                $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                
                 $count = 0; 
-                foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
-                    
-                    if($v == $uslugi_col_name_array[$count] ) {
-                        echo '<h3 class="Uslugi-text-align">'.$v."</h3>";
-                        $count++; 
-                        if($count>=sizeof($uslugi_col_name_array)) {
-                            $count = 0;
+                for($i = 0; $i<sizeof($section_array); $i++){
+                    echo '<h3 class="Uslugi-text-align">'.$section_array[$i]."</h3>";
+                    $uslugi_col_name = $conn->prepare('SELECT subsection, content, price FROM services WHERE section = "'.$section_array[$i].'"');
+                    $uslugi_col_name->execute();
+                    $result = $uslugi_col_name->setFetchMode(PDO::FETCH_ASSOC);
+                    foreach(new TableRows(new RecursiveArrayIterator($uslugi_col_name->fetchAll())) as $k=>$v) {
+                        
+                        if($count == 0) {
+                            echo '<h4>'.$v."</h4>";
+                            $count++; 
+                        }
+                        else if($count == 1) {
+                            echo "<label>*".$v."</label>";
+                            $count++; 
+                        }
+                        else {
+                            echo "<label>: ".$v."</label>";
+                            $count--;
                         }
                     }
-                    else  {
-                        echo "<p>*".$v."</p>";
-                    }
-                }
+                    $count = 0;
+            }
             }
         }
         catch(PDOException $e) {
@@ -105,6 +110,10 @@ class TableRows extends RecursiveIteratorIterator {
 
     function current() {
         return parent::current();
+    }
+
+    function endChildren() {
+        echo "zł";
     }
 }
 
