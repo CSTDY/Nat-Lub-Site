@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="pl">
-
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Pinyon+Script" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <title>NatLubSite_ADMIN</title>
-    <link rel="stylesheet" type="text/css" href="Admin-static/cssIMG/Admin.css">
+<?php
+    include_once('Admin-Includes/Admin-Header-section.php');
+?>
 </head>
 
 <body>
@@ -31,8 +25,11 @@
             </div>
         </div>
         <section class="content">
-            <div class="width1">
-
+            <div class="width1 content-center">
+                <?php
+                    $content->Get_columns_names('services', 'Uslugi');
+                    $content->get_result();
+                ?>
             </div>
         </section>
 

@@ -52,8 +52,6 @@ class Upload_content {
             if($this->checker_Uslugi) {
                 $this->checker_Uslugi = false;
                 //
-                // Uslugi columns name
-                //
                 $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 $section_array = array();
                 foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
@@ -61,10 +59,6 @@ class Upload_content {
                 }
                 
                 print_r(array_values($section_array));
-                
-                //
-                //check witch values belongs to witch columns
-                
                 /********************QUERY THAT TAKES COLUMNS NAME!!!!!! **********************/
                 // SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'services' ORDER BY ORDINAL_POSITION
                 
@@ -92,6 +86,7 @@ class Upload_content {
                     $count = 0;
             }
             }
+            //
         }
         catch(PDOException $e) {
             echo "Connected failed: ".$e->getMessage();
@@ -117,5 +112,3 @@ class TableRows extends RecursiveIteratorIterator {
     }
 }
 
-define ('ROOT_PATH', realpath(dirname(__FILE__)));
-define('BASE_URL', 'http://localhost/Nat_Lub_Site/');
