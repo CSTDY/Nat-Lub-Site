@@ -19,7 +19,6 @@ private function table_exists(&$db, $table) {
         return FALSE;
     }
     $result->free();
-
 }
 
 //Uslugi
@@ -27,18 +26,17 @@ private function table_exists(&$db, $table) {
 function Get_columns_names($table_name, $Section_name) {
     if($Section_name == "Uslugi") {
         $this->Checker_Uslugi = true;
-    }
-    if($Section_name == "Prace") {
-        $this->Checker_Prace = true;
+        $this->sql = "SELECT * FROM $table_name";
     }
     if($Section_name == "O_sobie") {
         $this->Checker_O_sobie = true;
+        $this->sql = "SELECT * FROM $table_name";
     }
     if($Section_name == "Glowna") {
         $this->Checker_Glowna = true;
+        $this->sql = "SELECT * FROM $table_name";
     }
     $this->sql_col_names = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '$table_name' ORDER BY ORDINAL_POSITION";
-    $this->sql = "SELECT * FROM $table_name";
 }
 
 private function Draw_table($Column_names, $Column_values) {
@@ -56,7 +54,7 @@ private function Draw_table($Column_names, $Column_values) {
 
 
 function get_result() {
-    require_once("Connect-path.php");
+    include("Connect-path.php");
     try {
         $conn = new PDO("mysql:host=$host;dbname=$db_name", $db_user, $db_password);
         //polish characters
@@ -82,14 +80,6 @@ function get_result() {
             $this->Draw_table($stmt_col_names, $stmt);
         }
 
-        //Prace
-        if($this->Checker_Prace) {
-            $this->Checker_Prace = false;
-            $result_col = $stmt_col_names->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $this->Draw_table($stmt_col_names, $stmt);
-        }
-
         //O sobie
         if($this->Checker_O_sobie) {
             $this->Checker_O_sobie = false;
@@ -110,6 +100,62 @@ function get_result() {
     }
     catch(Exception $e) {
         echo "Connected failed: ".$e->getMessage();
+    }
+}
+function upload_img() {
+    include("Connect-path.php");
+    
+    $conn = new mysqli($host, $db_user, $db_password, $db_name);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $target_dir = "C:/xampp/htdocs/Nat-Lub-Site/Admin/Admin-Includes/Classes/Prace-img/";
+    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    // Check if image file is a actual image or fake image
+    if(isset($_POST["submit"])) {
+        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+        if($check !== false) {
+            echo "Zdjęcie ma typ " . $check["mime"] . ".</br>";
+            $uploadOk = 1;
+        } else {
+            echo "Plik nie jest zdjęciem.";
+            $uploadOk = 0;
+        }
+    }
+    // Check if file already exists
+    if (file_exists($target_file)) {
+        echo "Taki plik już istnieje.";
+        $uploadOk = 0;
+    }
+    // Check file size
+    if ($_FILES["fileToUpload"]["size"] > 5000000) {
+        echo "Plik jest zbyt duży.";
+        $uploadOk = 0;
+    }
+    // Allow certain file formats
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+    && $imageFileType != "gif" ) {
+        echo "Możesz załadować tylko pliki JPG, JPEG, PNG & GIF.";
+        $uploadOk = 0;
+    }
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        echo "Twój plik nie został załadowany.";
+    // if everything is ok, try to upload file
+    } else {
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+            $sq = 'INSERT INTO projects(images) VALUES ("'.$_FILES["fileToUpload"]["name"].'")';  
+            if ($conn->query($sq) === TRUE) {
+                echo "Plik ". basename( $_FILES["fileToUpload"]["name"]). " został przesłany pomyślnie.";
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+        } else {
+            echo "Wystąpiły błędy podczas przesyłania pliku.";
+        }
     }
 }
 }

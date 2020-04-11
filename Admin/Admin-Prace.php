@@ -6,50 +6,60 @@
 <body>
     <div class="container">
         <!--TopNav-->
-        <div class="topnav">
-            <div class="width1">
-                <div class="topnav-menu">
-                    <div class="topnav-menu-item"><a href="Admin-site.php">
-                            <h3>Główna</h3>
-                        </a></div>
-                    <div class="topnav-menu-item"><a href="Admin-Usługi.php">
-                            <h3>Usługi</h3>
-                        </a></div>
-                    <div class="topnav-menu-item"><a href="Admin-Prace.php">
-                            <h3>Prace</h3>
-                        </a></div>
-                    <div class="topnav-menu-item"><a href="Admin-O-sobie.php">
-                            <h3>O sobie</h3>
-                        </a></div>
-                </div>
-            </div>
-        </div>
+        <?php
+            include_once("Admin-Includes/Admin-TopNav.php");
+        ?>
         <section class="content">
             <div class="width1">
-            Reading
+                <form action="" method="post" enctype="multipart/form-data">
+                    <span>Wybierz zdjęcie, które chcesz dodać:</span>
+                    <input type="file" name="fileToUpload" id="fileToUpload" onchange="readURL(this)">
+                    <input type="submit" value="Dodaj pracę" name="submit"></br></br>
+                    <?php
+                        if(isset($_POST['fileToUpload'])) {
+                            echo '<input type="button" value="Anuluj" name="cancel">';
+                        }
+                    ?>
+                    <div class="img-preview">
+                        <div class="img_prev_box">
+                            <img id="prev" src="#" alt="TWOJE ZDJĘCIE" />
+                        </div>
+                    </div>
+                </form>
+                <?php
+                    if(isset($_POST['submit'])) {
+                        return $content->upload_img();
+                    }
+                ?>
+                
+                <h2>Przesłane prace</h2>
+                <div class="img_box">
+                    <div class="images">
+                        <?php
+                include('Admin-Includes/Classes/Connect-path.php');
+                $conn = new mysqli($host, $db_user, $db_password, $db_name);
 
-Information Technology 
-What is Information Technology?
-Information Technology (IT) is the application of computers and internet to store, retrieve, transmit, and manipulate information, often in the context of a business or other enterprise. IT is considered a subset of information and communications technology (ICT) and has evolved according to the needs. 
-It is worthwhile noting that the term IT is commonly used as a synonym for computers and computer networks, but it also encompasses other information distribution technologies such as television and telephones. Several industries are associated with information technology, including computer hardware, software, electronics, semiconductors, internet, telecom equipment, engineering, healthcare, e-commerce, and computer services.
-Thanks to the continuous development of computers, the original computing systems became minicomputers and later personal computers took the lead. Nowadays, mobile phones are dethroning the personal computer and computing is evolving faster to become disembodied more like a cloud, becoming accessible more easily whenever needed. Information technology has transformed people and companies and has allowed digital technology to influence society and economy alike. It has, in this sense, shaped societies and adapted itself to people's needs. 
-History
-If you want a brief history of Information Technology, here is one. Humans were the first "computers". Then, machines were invented to carry out the computational tasks. Now these machines have given way to new form of information technology. Information has become disembodied accessible from anywhere through cloud technology. Recent advances in IT is the consequence of the development in computing systems.
-Humans have been storing, retrieving, manipulating, and communicating information since the Sumerians in Mesopotamia developed writing in about 3000 BC, but the term information technology in its modern sense first appeared in a 1958 article published in the Harvard Business Review; authors Harold J. Leavitt and Thomas L. Whisler commented that "the new technology does not yet have a single established name. We shall call it information technology (IT)." Their definition consists of three categories: techniques for processing, the application of statistical and mathematical methods to decision-making, and the simulation of higher-order thinking through computer programs.
-Comprehension
-Information technology is changing principally because of:
-a. the changing needs 
-b. new technological advances 
-According to the author the first computers were:
-a. calculators
-b. humans
-Development of information technology is the result of:
-a. advances in computing systems 
-b. development of machinery in general 
-Computing systems are taking the form of clouds means:
-a. computers have become smaller
-b. computing power are becoming disembodied.
-
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+                $query = $conn->query("SELECT * FROM projects ORDER BY release_date DESC");
+                    if($query->num_rows > 0 ) {
+                        while($row = $query->fetch_assoc()) {
+                            $imageURL = "Admin-Includes/Classes/Prace-img/".$row['images'];
+                            ?>
+                        <img src="<?php echo $imageURL; ?>" alt="Imidź" /></br>
+                        <?php
+                        }
+                    }
+                    else {
+                        ?>
+                        <p>Nie ma jeszcze żadnych zdjęć.</p>
+                        <?php
+                    }
+                ?>
+                    </div>
+                </div>
             </div>
         </section>
 
