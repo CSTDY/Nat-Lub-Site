@@ -4,6 +4,7 @@ class Site_functions {
 
 private $sql;
 private $sql_col_names;
+private $sql_id;
 // bool values witch checks witch section is used
 private $Checker_Uslugi = false;
 private $Checker_Prace = false;
@@ -26,17 +27,17 @@ private function table_exists(&$db, $table) {
 function Get_columns_names($table_name, $Section_name) {
     if($Section_name == "Uslugi") {
         $this->Checker_Uslugi = true;
-        $this->sql = "SELECT * FROM $table_name";
+        $this->sql_id = "SELECT id FROM $table_name";
     }
     if($Section_name == "O_sobie") {
         $this->Checker_O_sobie = true;
-        $this->sql = "SELECT * FROM $table_name";
+        $this->sql_id = "SELECT id FROM $table_name";
     }
     if($Section_name == "Glowna") {
         $this->Checker_Glowna = true;
-        $this->sql = "SELECT * FROM $table_name";
     }
     $this->sql_col_names = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '$table_name' ORDER BY ORDINAL_POSITION";
+    $this->sql = "SELECT * FROM $table_name";
 }
 
 private function Draw_table($Column_names, $Column_values) {
@@ -44,7 +45,6 @@ private function Draw_table($Column_names, $Column_values) {
     foreach(new TableColumnNames(new RecursiveArrayIterator($Column_names->fetchAll())) as $k=>$v) {
         echo $v;
     }
-    
     foreach(new TableRows(new RecursiveArrayIterator($Column_values->fetchAll())) as $k=>$v) {
         echo $v;
     }
@@ -52,6 +52,14 @@ private function Draw_table($Column_names, $Column_values) {
     echo "</table>";
 }
 
+private function Draw_Edit_Buttons($Column_values) {
+    echo "<table style='border: solid 1px black;'><th>btn</th>";
+    foreach(new EditButtons(new RecursiveArrayIterator($Column_values->fetchAll())) as $k=>$v) {
+        echo $v;
+    }
+
+    echo "</table>";
+}
 
 function get_result() {
     include("Connect-path.php");
@@ -75,9 +83,17 @@ function get_result() {
         //Uslugi
         if($this->Checker_Uslugi) {
             $this->Checker_Uslugi = false;
+            $stmt_id = $conn->prepare($this->sql_id);
+            $stmt_id->execute();
+            $result_id = array();
+            $result_id[] = $stmt_id->setFetchMode(PDO::FETCH_ASSOC);
             $result_col = $stmt_col_names->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $this->Draw_table($stmt_col_names, $stmt);
+            $this->Draw_Edit_Buttons($stmt_id);
+            for($i=1; $i<=sizeof($result_id)+1; $i++) {
+                echo $i."</br>";
+            }
         }
 
         //O sobie
@@ -186,9 +202,28 @@ class TableColumnNames extends RecursiveIteratorIterator {
     function current() {
         return "<th>" . parent::current(). "</th>";
     }
+}
 
-    
+class EditButtons extends RecursiveIteratorIterator {
+    private $Form_edit = "Form_edit";
+    private $Form_add = "Form_add";
+    function __construct($it) {
+        parent::__construct($it, self::LEAVES_ONLY);
+    }
 
+    function current() {
+        return "<td style='border: 1px solid black; padding:10px 10px 10px 10px; text-align: center;'>
+        <input style='font-size: 1em;' type='button' value='Edytuj'".' onclick="Show_block(\''.$this->Form_edit.'\');
+         Hide_block(\''.$this->Form_add.'\')" name=\'' . parent::current(). "' id='".parent::current()."'></td>";
+    }
+
+    function beginChildren() {
+        echo "<tr>";
+    }
+
+    function endChildren() {
+        echo "</tr>" . "\n";
+    }
 }
 define ('ROOT_PATH', realpath(dirname(__FILE__)));
 define('BASE_URL', 'http://localhost/Nat_Lub_Site/');

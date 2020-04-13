@@ -9,3 +9,11 @@ function readURL(input) {
     reader.readAsDataURL(input.files[0]);
     }
 }
+
+function Show_block(id) {
+    document.getElementById(id).style.display = "block";
+}
+
+function Hide_block(id) {
+    document.getElementById(id).style.display = "none";
+}
