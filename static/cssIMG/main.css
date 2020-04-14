@@ -253,6 +253,14 @@ form>.form-submit-btn {
     text-align: center;
 }
 
+/*Reklamy*/
+
+.ads {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0 0 0;
+}
+
 /*MOBILE AND TABLET*/
 
 @media (max-width: 1124px) {

@@ -1,14 +1,19 @@
 <?php 
+define ('PROJECTS_PATH', 'C:/xampp/htdocs/Nat-Lub-Site/Admin/Admin-Includes/Classes/Prace-img/');
+define('BASE_URL', 'http://localhost/Nat_Lub_Site/');
 class Upload_content {
 
     private $sql;
     private $sql_extra;
+    private $checker_Uslugi; //bool function, check if Uslugi(x) function is called
+    private $checker_O_sobie; //bool function, check if O_sobie(x) function is called
+    private $checker_Prace;
     private function No_conditon_query($data_location) {
         $this->sql = "SELECT * FROM $data_location";
     } 
 
     //O-sobie.php
-    private $checker_O_sobie; //bool function, check if O_sobie(x) function is called
+   
     
     function O_sobie($location) {
         $this->checker_O_sobie = true;
@@ -19,13 +24,16 @@ class Upload_content {
         echo "<p>".$result['tekst']."</p>";
     }
     //Usługi.php
-    private $checker_Uslugi; //bool function, check if Uslugi(x) function is called
-
+    
     function Uslugi($location) {
         $this->checker_Uslugi = true;
-        $this->sql = "SELECT section FROM $location";
+        $this->sql = "SELECT section FROM $location ";
     }
 
+    //Prace.php
+    function Prace() {
+        
+    }
     //Results
     function get_result() {
         require_once("Connect-path.php");
@@ -55,10 +63,11 @@ class Upload_content {
                 $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 $section_array = array();
                 foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
-                    $section_array[] = $v;
+                    //Check if Selected section already exist
+                    if(!in_array($v, $section_array)) {
+                        $section_array[] = $v;
+                    }
                 }
-                
-                print_r(array_values($section_array));
                 /********************QUERY THAT TAKES COLUMNS NAME!!!!!! **********************/
                 // SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'services' ORDER BY ORDINAL_POSITION
                 
@@ -69,24 +78,27 @@ class Upload_content {
                     $uslugi_col_name->execute();
                     $result = $uslugi_col_name->setFetchMode(PDO::FETCH_ASSOC);
                     foreach(new TableRows(new RecursiveArrayIterator($uslugi_col_name->fetchAll())) as $k=>$v) {
-                        
+                        //$count makes that subsection is <h4>
                         if($count == 0) {
                             echo '<h4>'.$v."</h4>";
                             $count++; 
                         }
-                        else if($count == 1) {
-                            echo "<label>*".$v."</label>";
-                            $count++; 
+                        else if(is_numeric($v)) {
+                            echo ": ".$v.' zł </br>';
                         }
                         else {
-                            echo "<label>: ".$v."</label>";
-                            $count--;
+                            echo "<label> ".$v."</label>";
                         }
                     }
+                    
                     $count = 0;
             }
             }
-            //
+            //Prace.php
+            if($this->checker_Prace) {
+                $this->checker_Prace = false;
+                
+            }
         }
         catch(PDOException $e) {
             echo "Connected failed: ".$e->getMessage();
@@ -106,9 +118,8 @@ class TableRows extends RecursiveIteratorIterator {
     function current() {
         return parent::current();
     }
+    
+    
 
-    function endChildren() {
-        echo "zł";
-    }
 }
 

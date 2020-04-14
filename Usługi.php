@@ -13,7 +13,7 @@
             <div class="width1">
                 <div class="border1">
                     <!--Funkcja pobierająca menu z bazy-->
-                        <?php
+                    <?php
                         $content->Uslugi("services");
                         echo $content->get_result();
                     ?>
@@ -21,6 +21,13 @@
             </div>
         </div>
     </div>
+    <!--Reklama-->
+    <div class="width1">
+        <div class="ads">
+            Reklama
+        </div>
+    </div>
+    <!--Container END-->
     </div>
     </div>
     <footer>

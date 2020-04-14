@@ -91,9 +91,6 @@ function get_result() {
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $this->Draw_table($stmt_col_names, $stmt);
             $this->Draw_Edit_Buttons($stmt_id);
-            for($i=1; $i<=sizeof($result_id)+1; $i++) {
-                echo $i."</br>";
-            }
         }
 
         //O sobie
@@ -212,8 +209,8 @@ class EditButtons extends RecursiveIteratorIterator {
     }
 
     function current() {
-        return "<td style='border: 1px solid black; padding:10px 10px 10px 10px; text-align: center;'>
-        <input style='font-size: 1em;' type='button' value='Edytuj'".' onclick="Show_block(\''.$this->Form_edit.'\');
+        return "<td style='border: 1px solid black; padding: 6px 6px 6px 6px; text-align: center;'>
+        <input style='font-size: 0.8em;' type='button' value='Edytuj ".parent::current()."'".' onclick="Show_block(\''.$this->Form_edit.'\');
          Hide_block(\''.$this->Form_add.'\')" name=\'' . parent::current(). "' id='".parent::current()."'></td>";
     }
 

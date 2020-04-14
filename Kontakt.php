@@ -35,9 +35,9 @@ include_once("Includes/Head-section.php");
                                 </a>
                             </div>
                             <div class="form-col2">
-                                <form action="#" method="POST">
+                                <form action="Includes/Email-sender.php" method="POST">
                                     <input type="text" class="form-person-data form-cell-width" name="name"
-                                        placeholder="Imie">
+                                        placeholder="Imię">
                                     <p></p>
                                     <input type="text" class="form-person-data form-cell-width" name="email"
                                         placeholder="Email">
@@ -45,7 +45,7 @@ include_once("Includes/Head-section.php");
                                     <input type="text" class="form-person-data form-cell-width" name="topic"
                                         placeholder="Temat">
                                     <p></p>
-                                    <textarea type="text" class="form-message form-cell-width" name="content"
+                                    <textarea type="text" class="form-message form-cell-width" name="message"
                                         placeholder="Wiadomość"></textarea>
                                     <p></p>
                                     <p></p>
@@ -68,6 +68,13 @@ include_once("Includes/Head-section.php");
                     </div>
                 </div>
             </section>
+            <!--Reklama-->
+            <div class="width1">
+                <div class="ads">
+                    Reklama
+                </div>
+            </div>
+            <!--Container END-->
         </div>
     </div>
 

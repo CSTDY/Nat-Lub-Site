@@ -6,50 +6,52 @@
 <body>
     <div class="container">
         <div class="page-content">
-        <?php 
+            <?php 
                 include_once("Includes/Logo-section.php");
             ?>
             <div class="width1">
                 <!-- Załadowanie max 9 prac na jednej stronie. Reszta na pozostałych-->
                 <div class="images-container">
-                    <div class="image">
-                        <a href="#">
-                            <img src="static/cssIMG/images/Logo.png" alt="hamster">
-                        </a>
-                    </div>
-                    <div class="image"><a href="#">
-                            <img src="static/cssIMG/images/Logo.png" alt="hamster">
+                    <?php
+                    include('Includes/Classes_DB/Connect-path.php');
+                    $conn = new mysqli($host, $db_user, $db_password, $db_name);
 
-                        </a>
-                    </div>
-                    <div class="image"><a href="#">
-                            <img src="static/cssIMG/images/Logo.png" alt="hamster">
-
-                        </a>
-                    </div>
-                    <div class="image"><a href="#">
-                            <img src="static/cssIMG/images/Logo.png" alt="hamster">
-
-                        </a>
-                    </div>
-                    <div class="image"><a href="#">
-                            <img src="static/cssIMG/images/Logo.png" alt="hamster">
-
-                        </a>
-                    </div>
-                    <div class="image"><a href="#">
-                            <img src="static/cssIMG/images/Logo.png" alt="hamster">
-
-                        </a>
-                    </div>
-                    <div class="adds">
-                        <aside>
-
-                        </aside>
-                    </div>
+                    // Check connection
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+                    $query = $conn->query("SELECT * FROM projects ORDER BY release_date DESC");
+                        if($query->num_rows > 0 ) {
+                            while($row = $query->fetch_assoc()) {
+                                $imageURL = "Admin/Admin-Includes/Classes/Prace-img/".$row['images'];
+                                ?>
+                        <div class="image">
+                            <a href="#">
+                                <img src="<?php echo $imageURL; ?>" alt="Imidź" /></br>
+                            </a>
+                        </div>
+                        <?php
+                            }
+                        }
+                        else {
+                            ?>
+                        <p>Nie ma jeszcze żadnych zdjęć.</p>
+                        <?php
+                        
+                    $conn->close();}
+                    ?>
                 </div>
             </div>
         </div>
+        <!--Reklama-->
+        <div class="width1">
+            <div class="ads">
+                <?php 
+                                $content->Prace();
+                            ?>
+            </div>
+        </div>
+        <!--Container END-->
     </div>
     </div>
     <footer>

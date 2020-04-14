@@ -7,7 +7,7 @@ html, body {
 }
 
 body {
-    background-color: rgba(116, 114, 114, 0.973);
+    background-color: rgba(228, 226, 226, 0.973);
     margin: 0;
     line-height: 1.4em;
 }
@@ -44,7 +44,7 @@ footer {
     color: rgba(37, 37, 37, 0.973);
     text-align: center;
     margin: 50px 0 0 0;
-    background-color: rgba(168, 167, 167, 0.973);
+    background-color: rgba(187, 8, 8, 0.973);
     clear: both;
 }
 
@@ -58,7 +58,7 @@ footer>p {
     width: 100%;
     height: auto;
     top: 0;
-    background-color: rgba(37, 37, 37, 0.973);
+    background-color: rgba(187, 8, 8, 0.973);
 }
 
 .width1 {
