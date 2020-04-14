@@ -166,7 +166,7 @@ footer>p {
 /*Admin-O-sobie.php*/
 
 
-.Content_form>input {
+.Content_form>input,select {
     width: 100%;
     font-size: 1.3em;
     padding: 10px 10px 10px 10px;

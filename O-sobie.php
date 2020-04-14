@@ -10,7 +10,8 @@ include_once("Includes/Head-section.php");
                 include_once("Includes/Logo-section.php");
             ?>
             <div class="width1">
-                <div class="border1"> <!--Funkcja pobiera treść z bazy-->
+                <div class="border1"> 
+                    <!--Funkcja pobiera treść z bazy-->
                      <?php
                         $content->O_sobie("O_sobie");
                         echo $content->get_result();

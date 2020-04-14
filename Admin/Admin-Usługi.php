@@ -26,7 +26,11 @@
                         <div id="Form_edit">
                             <h3>Edytuj treść</h3>
                             <form class="Content_form" action="" method="POST">
-                                <input type="text" name="O_sobie_text_header_edit" placeholder="Nagłówek"></br>
+                                <select name="O_sobie_text_header_edit">
+                                    <option value="">Nazwa sekcji</option>
+                                    <option>coś</option>
+                                </select>
+                                </br>
                                 <textarea type="text" name="O_sobie_text_content_edit"
                                     placeholder="Treść"></textarea></br>
                                 <input type="submit" name="O_sobie_sub_edit" value="Zapisz zmiany">

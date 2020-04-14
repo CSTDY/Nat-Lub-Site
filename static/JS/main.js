@@ -21,13 +21,6 @@ function slajd_change() {
     // Change image 
 }
 
-function Slajd_plus(n) {
-  showDivs(myIndex += n);
-}
-
-function currentDiv(n) {
-  showDivs(myIndex = n);
-}
 
 function showDivs(n) {
   var i;
