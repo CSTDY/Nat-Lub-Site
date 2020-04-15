@@ -1,11 +1,11 @@
 <?php
-    include_once('Admin-includes/Header-section.php');
+    include_once('Admin-includes/Admin-Header-section.php');
 ?>
 </head>
 
 <body>
     <div class="Admin-Login">
-        <form method="POST">
+        <form action="Sign-In.php" method="POST">
             <input type="text" name="Admin" placeholder="Admin"></br></br>
             <input type="password" name="pass" placeholder="Hasło"></br></br>
             <input type="submit" name="sub-btn" value="Zaloguj się">

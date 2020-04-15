@@ -148,19 +148,45 @@ footer>p {
 .img_box {
     margin: 10px 0 0 0;
     width: 100%;
+    height: auto;
 }
 
 .images  {
     display: flex;
     flex-wrap: wrap;
     border: 2px dotted black;
-    height: 250px;
 }
-.images>img {
+
+.project_photo {
+    position: relative;
+    height: inherit;
+    height: 250px;
+    border: 1px dotted black;
+}
+
+.project_photo>img {
     width: 350px;
     padding: 15px 15px 15px 15px;
     height: inherit;
     background-size: cover;
+}
+
+.project_photo>form>.delete_btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    background: radial-gradient( 5px -9px, circle, white 8%, red 26px );
+    background-color: red;
+    border: 2px solid white;
+    border-radius: 12px; /* one half of ( (border * 2) + height + padding ) */
+    box-shadow: 1px 1px 1px black;
+    color: white;
+    font: bold 15px/13px Helvetica, Verdana, Tahoma;
+    height: 24px; 
+    min-width: 24px;
+    padding: 4px 3px 0 3px;
+    text-align: center;
 }
 
 /*Admin-O-sobie.php*/

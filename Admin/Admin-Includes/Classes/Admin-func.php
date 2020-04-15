@@ -7,9 +7,10 @@ private $sql_col_names;
 private $sql_id;
 // bool values witch checks witch section is used
 private $Checker_Uslugi = false;
-private $Checker_Prace = false;
 private $Checker_O_sobie = false;
 private $Checker_Glowna = false;
+private $Checker_Delete_project = false;
+private $sql_Delete_project;
 
 private function table_exists(&$db, $table) {
     $result = $db->query("SHOW TABLES LIKE '{$table}'");
@@ -87,8 +88,8 @@ function get_result() {
             $stmt_id->execute();
             $result_id = array();
             $result_id[] = $stmt_id->setFetchMode(PDO::FETCH_ASSOC);
-            $result_col = $stmt_col_names->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt_col_names->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $this->Draw_table($stmt_col_names, $stmt);
             $this->Draw_Edit_Buttons($stmt_id);
         }
@@ -104,17 +105,29 @@ function get_result() {
         //Główna
         if($this->Checker_Glowna) {
             $this->Checker_Glowna = false;
-            $result_col = $stmt_col_names->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt_col_names->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $this->Draw_table($stmt_col_names, $stmt);
         }
 
-        //
+        //Prace 
+        if($this->Checker_Delete_project) {
+            $this->Checker_Delete_project = false;
+            $stmt_delete = $conn->prepare($this->sql_Delete_project);
+            $stmt_delete->execute();
+            // $this->sql_Delete_project = "DELETE FROM $table_name WHERE id = $id";
+            echo "to ja hehe";
+
+        }
     }
     catch(Exception $e) {
         echo "Connected failed: ".$e->getMessage();
     }
+    $conn = null;
 }
+
+//Admin-Prace.php
+
 function upload_img() {
     include("Connect-path.php");
     
@@ -142,17 +155,28 @@ function upload_img() {
     if (file_exists($target_file)) {
         echo "Taki plik już istnieje.";
         $uploadOk = 0;
+        exit();
     }
     // Check file size
     if ($_FILES["fileToUpload"]["size"] > 5000000) {
         echo "Plik jest zbyt duży.";
         $uploadOk = 0;
+        exit();
+    }
+    //Check image dimension (width and height)
+    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    $img_width = $check[0];
+    $img_height = $check[1];
+    if($img_width > 1000 || $img_height >1000) {
+        echo "zdjęcie ma za dużą rozdzielczość!";
+        exit();
     }
     // Allow certain file formats
     if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
     && $imageFileType != "gif" ) {
         echo "Możesz załadować tylko pliki JPG, JPEG, PNG & GIF.";
         $uploadOk = 0;
+        exit();
     }
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
@@ -171,6 +195,39 @@ function upload_img() {
         }
     }
 }
+
+function Projects_on_page() {
+    
+    include('Admin-Includes/Classes/Connect-path.php');
+    $conn = new mysqli($host, $db_user, $db_password, $db_name);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $query = $conn->query("SELECT * FROM projects ORDER BY release_date DESC");
+        if($query->num_rows > 0 ) {
+            while($row = $query->fetch_assoc()) {
+                $imageURL = "Admin-Includes/Classes/Prace-img/".$row['images'];
+                ?>
+                <div class="project_photo">
+                    <img src="<?php echo $imageURL; ?>" alt="Imidż" /></br>
+                    <form method="get">
+                        <input class="delete_btn" type="button" name="delete_btn" value="X">
+                    </form>
+                </div>
+            <?php
+            }
+        }
+        else {
+            ?>
+            <p>Nie ma jeszcze żadnych zdjęć.</p>
+            <?php
+        }
+        mysqli_close($conn);
+    
+}
+
 }
 
 class TableRows extends RecursiveIteratorIterator {
@@ -222,5 +279,3 @@ class EditButtons extends RecursiveIteratorIterator {
         echo "</tr>" . "\n";
     }
 }
-define ('ROOT_PATH', realpath(dirname(__FILE__)));
-define('BASE_URL', 'http://localhost/Nat_Lub_Site/');

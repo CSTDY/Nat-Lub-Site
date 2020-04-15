@@ -14,7 +14,7 @@ include_once("Includes/Head-section.php");
                     <!--Funkcja pobiera treść z bazy-->
                      <?php
                         $content->O_sobie("O_sobie");
-                        echo $content->get_result();
+                        $content->get_result();
                     ?>
                 </div>
             </div>

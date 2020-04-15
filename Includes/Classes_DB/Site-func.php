@@ -5,9 +5,9 @@ class Upload_content {
 
     private $sql;
     private $sql_extra;
-    private $checker_Uslugi; //bool function, check if Uslugi(x) function is called
-    private $checker_O_sobie; //bool function, check if O_sobie(x) function is called
-    private $checker_Prace;
+    private $checker_Uslugi = false;   //bool function, check if Uslugi(x) function is called
+    private $checker_O_sobie = false;  //bool function, check if O_sobie(x) function is called
+    private $checker_Prace = false;
     private function No_conditon_query($data_location) {
         $this->sql = "SELECT * FROM $data_location";
     } 
@@ -104,6 +104,35 @@ class Upload_content {
             echo "Connected failed: ".$e->getMessage();
         }
         $conn = null;
+    }
+
+    function Projects_on_page() {
+        include('Includes/Classes_DB/Connect-path.php');
+        $conn = new mysqli($host, $db_user, $db_password, $db_name);
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $query = $conn->query("SELECT * FROM projects ORDER BY release_date DESC LIMIT 6");
+            if($query->num_rows > 0 ) {
+                while($row = $query->fetch_assoc()) {
+                    $imageURL = "Admin/Admin-Includes/Classes/Prace-img/".$row['images'];
+                    ?>
+            <div class="image">
+                <a href="#">
+                    <img src="<?php echo $imageURL; ?>" alt="Imidź" /></br>
+                </a>
+            </div>
+            <?php
+                }
+            }
+            else {
+                ?>
+            <p>Nie ma jeszcze żadnych zdjęć.</p>
+            <?php
+            
+        $conn->close();}
     }
 }
 
