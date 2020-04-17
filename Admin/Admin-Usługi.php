@@ -1,7 +1,7 @@
 <?php
     include_once('Admin-Includes/Admin-Header-section.php');
-    if(isset($_post['delete_service'])) {
-        
+    if(isset($_POST['delete_service'])) {
+        $content->Call_Delete("services", "delete_service");
     }
 ?>
 </head>
@@ -33,19 +33,29 @@
                                     <option value="">Nazwa sekcji</option>
                                     <option>coś</option>
                                 </select>
+                                <select>
+                                    <option></option>
+                                </select>
                                 </br>
                                 <textarea type="text" name="O_sobie_text_content_edit"
                                     placeholder="Treść"></textarea></br>
-                                <input type="submit" name="O_sobie_sub_edit" value="Zapisz zmiany">
+                                <input type="number" name="price" placeholder="Cena">
+                                <input type="submit" name="Save_Changes" value="Zapisz zmiany">
                             </form>
                         </div>
                         <div id="Form_add">
                             <h3>Dodaj nową treść</h3>
                             <form class="Content_form" action="" method="POST">
-                                <input type="text" name="O_sobie_text_header_add" placeholder="Nagłówek"></br>
+                                <select>
+                                    <option>coś</option>
+                                </select>
+                                <select>
+                                    <option></option>
+                                </select>
                                 <textarea type="text" name="O_sobie_text_content_add"
                                     placeholder="Treść"></textarea></br>
-                                <input type="submit" name="O_sobie_sub_add" value="Zapisz zmiany">
+                                <input type="number" name="price" placeholder="Cena">
+                                <input type="submit" name="Save_Changes" value="Zapisz zmiany">
                             </form>
                         </div>
                     </div>

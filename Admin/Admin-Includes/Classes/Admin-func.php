@@ -10,6 +10,7 @@ private $Checker_Uslugi = false;
 private $Checker_O_sobie = false;
 private $Checker_Glowna = false;
 private $sql_Delete;
+private $sql_Edit;
 
 private function table_exists(&$db, $table) {
     $result = $db->query("SHOW TABLES LIKE '{$table}'");
@@ -203,7 +204,7 @@ function Projects_on_page() {
                     <img src="<?php echo $imageURL; ?>" alt="Imidż" /></br>
                     <form method="POST">
                         <input type="text" name="content" value="<?php echo $row['images'];?>" style="display: none;">
-                        <input class="delete_btn" type="submit" name="delete_btn" value="X">
+                        <input class="delete_btn" type="submit" name="delete_project" value="X">
                     </form>
                 </div>
             <?php
@@ -219,17 +220,18 @@ function Projects_on_page() {
 }
 
 //DELETING
-function Call_Delete($table_name) {
-    if(isset($_POST["delete_btn"])) {
+function Call_Delete($table_name, $btn_name) {
+    if($btn_name == "delete_project") {
         $this->sql_Delete = "DELETE FROM $table_name WHERE images ='". $_POST["content"]."'";
-        $this->Delete();
-        
+        $this->Delete($btn_name);
+    }
+    if($btn_name == "delete_service") {
+        $this->sql_Delete = "DELETE FROM $table_name WHERE id = '". $_POST["Uslugi_del"]."'";
+        $this->Delete($btn_name);
     }
 }
 
-//Delete project
-
-private function Delete() {
+private function Delete($btn_name) {
     include("Connect-path.php");
     try {
         $conn = new PDO("mysql:host=$host;dbname=$db_name", $db_user, $db_password);
@@ -242,9 +244,14 @@ private function Delete() {
         $stmt = $conn->prepare($this->sql_Delete);
         $stmt->execute();
         
-        $file_dir = "C:/xampp/htdocs/Nat-Lub-Site/Admin/Admin-Includes/Classes/Prace-img/";
-        unlink($file_dir.$_POST['content']);
-        echo "Plik usunięty pomyślnie";
+        if($btn_name == "delete_project") {
+            $file_dir = "C:/xampp/htdocs/Nat-Lub-Site/Admin/Admin-Includes/Classes/Prace-img/";
+            unlink($file_dir.$_POST['content']);
+            echo "Plik usunięty pomyślnie";
+        }
+        if($btn_name == "delete_service") {
+            echo "Usługa została usunięta";
+        }
         
     }
     catch(PDOException $e) {
@@ -253,8 +260,30 @@ private function Delete() {
     $conn = null;
 }
 
-//Delete services
+//EDITING
 
+function Save_Changes($table_name, $btn_name) {
+    if($btn_name == "") {
+
+    }
+}
+
+private function Edition($btn_name) {
+    include("Connect-path.php");
+    try {
+        $conn = new PDO("mysql:host=$host;dbname=$db_name", $db_user, $db_password);
+        //polish characters
+        $conn -> query ('SET NAMES utf8');
+        $conn -> query ('SET CHARACTER_SET utf8_unicode_ci');
+        //
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $stmt = $conn->prepare($this->sql_Edit);
+        $stmt->execute();
+    }
+    catch(PDOException $e) {
+        echo $e->getMessage();
+    }
+}
 
 
 }
@@ -295,14 +324,15 @@ class EditButtons extends RecursiveIteratorIterator {
     }
 
     function current() {
-        return "<td style='border: 1px solid black; padding: 6px 6px 6px 6px; text-align: center;'>
+        return "<td style='border: 1px solid black; padding: 6px 6px 6px 6px; text-align: center; display:inline-flex;'>
         <form method='POST'>
-        <input style='font-size: 0.8em;' type='submit' value='Edytuj' onclick='Show_block(\''.$this->Form_edit.'\');
-         Hide_block(\''.$this->Form_add.'\') name='Uslugi_Edit'>
+        <input type='text' name='Uslugi_edit' value='".parent::current()."' style='display: none;'>
+        <input style='font-size: 0.8em;' type='button' value='Edytuj".parent::current()."' onclick='Show_block(\"Form_edit\");
+         Hide_block(\"Form_add\");' name='Uslugi_Edit'>
          </form>
          <form method='POST'>
-         <input type='text' name='Uslugi_delete_value' value='".parent::current()."' style='display: none;'>
-         <input type='submit' name='delete_service' value='Usuń'>
+         <input type='text' name='Uslugi_del' value='".parent::current()."' style='display: none;'>
+         <input type='submit' name='delete_service' value='Usuń ".parent::current()."'>
          </form>
          </td>";
     }

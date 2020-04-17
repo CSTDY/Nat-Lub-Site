@@ -1,7 +1,7 @@
 <?php
     include_once('Admin-includes/Admin-Header-section.php');
-    if(isset($_POST['delete_btn']))
-    $content->Call_Delete('projects'); 
+    if(isset($_POST['delete_project']))
+        $content->Call_Delete('projects', 'delete_project'); 
     
 ?>
 </head>
