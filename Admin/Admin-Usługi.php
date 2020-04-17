@@ -1,5 +1,8 @@
 <?php
     include_once('Admin-Includes/Admin-Header-section.php');
+    if(isset($_post['delete_service'])) {
+        
+    }
 ?>
 </head>
 

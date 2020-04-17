@@ -9,8 +9,7 @@ private $sql_id;
 private $Checker_Uslugi = false;
 private $Checker_O_sobie = false;
 private $Checker_Glowna = false;
-private $Checker_Delete_project = false;
-private $sql_Delete_project;
+private $sql_Delete;
 
 private function table_exists(&$db, $table) {
     $result = $db->query("SHOW TABLES LIKE '{$table}'");
@@ -23,7 +22,7 @@ private function table_exists(&$db, $table) {
     $result->free();
 }
 
-//Uslugi
+////////////////////////
 
 function Get_columns_names($table_name, $Section_name) {
     if($Section_name == "Uslugi") {
@@ -97,8 +96,8 @@ function get_result() {
         //O sobie
         if($this->Checker_O_sobie) {
             $this->Checker_O_sobie = false;
-            $result_col = $stmt_col_names->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt_col_names->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $this->Draw_table($stmt_col_names, $stmt);
         }
 
@@ -108,16 +107,6 @@ function get_result() {
             $stmt_col_names->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $this->Draw_table($stmt_col_names, $stmt);
-        }
-
-        //Prace 
-        if($this->Checker_Delete_project) {
-            $this->Checker_Delete_project = false;
-            $stmt_delete = $conn->prepare($this->sql_Delete_project);
-            $stmt_delete->execute();
-            // $this->sql_Delete_project = "DELETE FROM $table_name WHERE id = $id";
-            echo "to ja hehe";
-
         }
     }
     catch(Exception $e) {
@@ -212,8 +201,9 @@ function Projects_on_page() {
                 ?>
                 <div class="project_photo">
                     <img src="<?php echo $imageURL; ?>" alt="Imidż" /></br>
-                    <form method="get">
-                        <input class="delete_btn" type="button" name="delete_btn" value="X">
+                    <form method="POST">
+                        <input type="text" name="content" value="<?php echo $row['images'];?>" style="display: none;">
+                        <input class="delete_btn" type="submit" name="delete_btn" value="X">
                     </form>
                 </div>
             <?php
@@ -227,6 +217,45 @@ function Projects_on_page() {
         mysqli_close($conn);
     
 }
+
+//DELETING
+function Call_Delete($table_name) {
+    if(isset($_POST["delete_btn"])) {
+        $this->sql_Delete = "DELETE FROM $table_name WHERE images ='". $_POST["content"]."'";
+        $this->Delete();
+        
+    }
+}
+
+//Delete project
+
+private function Delete() {
+    include("Connect-path.php");
+    try {
+        $conn = new PDO("mysql:host=$host;dbname=$db_name", $db_user, $db_password);
+        //polish characters
+        $conn -> query ('SET NAMES utf8');
+        $conn -> query ('SET CHARACTER_SET utf8_unicode_ci');
+        //
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $conn->prepare($this->sql_Delete);
+        $stmt->execute();
+        
+        $file_dir = "C:/xampp/htdocs/Nat-Lub-Site/Admin/Admin-Includes/Classes/Prace-img/";
+        unlink($file_dir.$_POST['content']);
+        echo "Plik usunięty pomyślnie";
+        
+    }
+    catch(PDOException $e) {
+        echo  $e->getMessage();
+    }
+    $conn = null;
+}
+
+//Delete services
+
+
 
 }
 
@@ -267,8 +296,15 @@ class EditButtons extends RecursiveIteratorIterator {
 
     function current() {
         return "<td style='border: 1px solid black; padding: 6px 6px 6px 6px; text-align: center;'>
-        <input style='font-size: 0.8em;' type='button' value='Edytuj ".parent::current()."'".' onclick="Show_block(\''.$this->Form_edit.'\');
-         Hide_block(\''.$this->Form_add.'\')" name=\'' . parent::current(). "' id='".parent::current()."'></td>";
+        <form method='POST'>
+        <input style='font-size: 0.8em;' type='submit' value='Edytuj' onclick='Show_block(\''.$this->Form_edit.'\');
+         Hide_block(\''.$this->Form_add.'\') name='Uslugi_Edit'>
+         </form>
+         <form method='POST'>
+         <input type='text' name='Uslugi_delete_value' value='".parent::current()."' style='display: none;'>
+         <input type='submit' name='delete_service' value='Usuń'>
+         </form>
+         </td>";
     }
 
     function beginChildren() {
