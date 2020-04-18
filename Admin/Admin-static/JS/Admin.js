@@ -17,3 +17,8 @@ function Show_block(id) {
 function Hide_block(id) {
     document.getElementById(id).style.display = "none";
 }
+
+function Download_ID(id, target) {
+    var val = document.getElementById(id).value;
+    document.getElementById(target).value = val;
+}

@@ -214,6 +214,10 @@ footer>p {
     display: none;
 }
 
+#Form_add_section {
+    display: none;
+}
+
 /*TABLETS AND PHONES*/
 
 @media (max-width: 1124px) {

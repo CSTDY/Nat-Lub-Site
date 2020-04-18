@@ -1,7 +1,17 @@
 <?php
     include_once('Admin-Includes/Admin-Header-section.php');
+    $Service_id;
     if(isset($_POST['delete_service'])) {
         $content->Call_Delete("services", "delete_service");
+    }
+    if(isset($_POST['Save_Changes'])) {
+        $content->Save_Changes('services', 'Save_Changes');
+    }
+    if(isset($_POST['Save_Edition'])) {
+        $content->Save_Changes('services', 'Save_Edition');
+    }
+    if(isset($_POST['Save_Section'])) {
+        $content->Save_Changes('services', 'Save_Section');
     }
 ?>
 </head>
@@ -23,39 +33,52 @@
                     </div>
                     <div class="form_box btn">
                         <input type="button" name="Uslugi_add" value="Dodaj"
-                            onclick="Show_block('Form_add'); Hide_block('Form_edit')">
+                            onclick="Show_block('Form_add'); Hide_block('Form_edit'); Hide_block('Form_add_section')">
+                            <input type="button" name="Uslugi_Add_Section" value="Dodaj sekcję" onclick="Show_block('Form_add_section');
+                            Hide_block('Form_add'); Hide_block('Form_edit')">
                     </div>
                     <div class="Form_box_edition">
                         <div id="Form_edit">
                             <h3>Edytuj treść</h3>
                             <form class="Content_form" action="" method="POST">
-                                <select name="O_sobie_text_header_edit">
-                                    <option value="">Nazwa sekcji</option>
-                                    <option>coś</option>
-                                </select>
-                                <select>
-                                    <option></option>
+                                <input id="row_id" name="row_id" style="display: none;">
+                                <select name="section">
+                                    <?php
+                                        $content->Draw_Values('section');
+                                    ?>
                                 </select>
                                 </br>
-                                <textarea type="text" name="O_sobie_text_content_edit"
+                                <textarea type="text" name="Services_content"
                                     placeholder="Treść"></textarea></br>
-                                <input type="number" name="price" placeholder="Cena">
-                                <input type="submit" name="Save_Changes" value="Zapisz zmiany">
+                                <input type="number" min="0" name="price" placeholder="Cena">
+                                <input type="submit" name="Save_Edition" value="Zapisz zmiany">
                             </form>
                         </div>
                         <div id="Form_add">
                             <h3>Dodaj nową treść</h3>
                             <form class="Content_form" action="" method="POST">
-                                <select>
-                                    <option>coś</option>
+                                <select name="section">
+                                    <?php
+                                        $content->Draw_Values('section');
+                                    ?>
                                 </select>
-                                <select>
-                                    <option></option>
-                                </select>
-                                <textarea type="text" name="O_sobie_text_content_add"
+                                </br>
+                                <textarea type="text" name="Services_content"
                                     placeholder="Treść"></textarea></br>
-                                <input type="number" name="price" placeholder="Cena">
+                                <input type="number" min="0" name="price" placeholder="Cena">
                                 <input type="submit" name="Save_Changes" value="Zapisz zmiany">
+                            </form>
+                        </div>
+                        <div id="Form_add_section">
+                            <h3>Dodaj nową sekcję</h3>
+                            <form class="Content_form" action="" method="POST">
+                                <input type="text" name="New_section" placeholder="sekcja">
+                                </br>
+                                <input type="text" name="New_subsection" placeholder="podsekcja">
+                                <textarea type="text" name="Services_content"
+                                    placeholder="Treść"></textarea></br>
+                                <input type="number" min="0" name="price" placeholder="Cena">
+                                <input type="submit" name="Save_Section" value="Zapisz zmiany">
                             </form>
                         </div>
                     </div>

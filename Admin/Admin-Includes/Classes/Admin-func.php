@@ -62,6 +62,39 @@ private function Draw_Edit_Buttons($Column_values) {
     echo "</table>";
 }
 
+function Draw_Values($Col_name) {
+    include("Connect-path.php");
+    try {
+        $conn = new PDO("mysql:host=$host;dbname=$db_name", $db_user, $db_password);
+        //polish characters
+        $conn -> query ('SET NAMES utf8');
+        $conn -> query ('SET CHARACTER_SET utf8_unicode_ci');
+        //
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        $stmt_select = $conn->prepare("SELECT DISTINCT $Col_name FROM services");
+        $stmt_select->execute();
+        if($Col_name == "section") {
+            $stmt_select->setFetchMode(PDO::FETCH_ASSOC);
+            $this->Draw_Select_Values($stmt_select);
+        }
+        if($Col_name == "subsection") {
+            $stmt_select->setFetchMode(PDO::FETCH_ASSOC);
+            $this->Draw_Select_Values($stmt_select);
+        }
+    }
+    catch(PDOException $e) {
+        echo $e->getMessage();
+    }
+    $conn = null;
+}
+
+private function Draw_Select_Values($Column_values) {
+    foreach(new SelectValues(new RecursiveArrayIterator($Column_values->fetchAll())) as $k=>$v) {
+        echo $v;
+    }
+}
+
 function get_result() {
     include("Connect-path.php");
     try {
@@ -86,8 +119,7 @@ function get_result() {
             $this->Checker_Uslugi = false;
             $stmt_id = $conn->prepare($this->sql_id);
             $stmt_id->execute();
-            $result_id = array();
-            $result_id[] = $stmt_id->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt_id->setFetchMode(PDO::FETCH_ASSOC);
             $stmt_col_names->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $this->Draw_table($stmt_col_names, $stmt);
@@ -260,12 +292,25 @@ private function Delete($btn_name) {
     $conn = null;
 }
 
-//EDITING
+//EDITING AND SAVING
 
 function Save_Changes($table_name, $btn_name) {
-    if($btn_name == "") {
-
+    if($btn_name == "Save_Changes") {
+        $this->sql_Edit = "INSERT INTO $table_name (section, content, price) VALUES ('".$_POST["section"]."', '".$_POST["Services_content"]."'
+        , '".$_POST["price"]."')";
+        $this->Edition($btn_name);
     }
+    if($btn_name == "Save_Edition") {
+        $this->sql_Edit = "UPDATE $table_name SET section='".$_POST['section']."', content='".$_POST['Services_content']."', 
+        price = '".$_POST['price']."' WHERE id ='".$_POST['row_id']."'";
+        $this->Edition($btn_name);
+    }
+    if($btn_name == "Save_Section") {
+        $this->sql_Edit = "INSERT INTO $table_name VALUES (NULL, '".$_POST['New_section']."', '".$_POST['New_subsection']."', 
+        '".$_POST['Services_content']."', '".$_POST['price']."')";
+        $this->Edition($btn_name); 
+    }
+    
 }
 
 private function Edition($btn_name) {
@@ -279,6 +324,7 @@ private function Edition($btn_name) {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $stmt = $conn->prepare($this->sql_Edit);
         $stmt->execute();
+        echo "Dodano nową usługę";
     }
     catch(PDOException $e) {
         echo $e->getMessage();
@@ -317,8 +363,6 @@ class TableColumnNames extends RecursiveIteratorIterator {
 }
 
 class EditButtons extends RecursiveIteratorIterator {
-    private $Form_edit = "Form_edit";
-    private $Form_add = "Form_add";
     function __construct($it) {
         parent::__construct($it, self::LEAVES_ONLY);
     }
@@ -326,9 +370,9 @@ class EditButtons extends RecursiveIteratorIterator {
     function current() {
         return "<td style='border: 1px solid black; padding: 6px 6px 6px 6px; text-align: center; display:inline-flex;'>
         <form method='POST'>
-        <input type='text' name='Uslugi_edit' value='".parent::current()."' style='display: none;'>
+        <input type='text' name='Uslugi_edit' id='Edit_".parent::current()."' value='".parent::current()."' style='display: none;'>
         <input style='font-size: 0.8em;' type='button' value='Edytuj".parent::current()."' onclick='Show_block(\"Form_edit\");
-         Hide_block(\"Form_add\");' name='Uslugi_Edit'>
+         Hide_block(\"Form_add\"); Hide_block(\"Form_add_section\"); Download_ID(\"Edit_".parent::current()."\", \"row_id\");' name='Uslugi_Edit_btn'>
          </form>
          <form method='POST'>
          <input type='text' name='Uslugi_del' value='".parent::current()."' style='display: none;'>
@@ -343,5 +387,15 @@ class EditButtons extends RecursiveIteratorIterator {
 
     function endChildren() {
         echo "</tr>" . "\n";
+    }
+}
+
+class SelectValues extends RecursiveIteratorIterator {
+    function __construct($it) {
+        parent::__construct($it, self::LEAVES_ONLY);
+    }
+
+    function current() {
+        return "<option>".parent::current()."</option>";
     }
 }
