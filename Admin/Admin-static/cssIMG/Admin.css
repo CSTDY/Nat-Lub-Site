@@ -27,6 +27,11 @@ a {
     text-align: center;
 }
 
+.Admin-log-form>input {
+    font-size: 1.2em;
+    padding: 5px 5px 5px 5px;
+}
+
 /*Positioning footer at the bottom */
 .container {
     min-height: 100%;
@@ -71,10 +76,12 @@ footer>p {
     justify-content: space-between;
 }
 
-.topnav-item .topnav-menu-item {
-    font-size: 1.2em;
-    color: rgba(230, 225, 225, 0.973);
-    padding: 14px 15px;
+.topnav-menu-item {
+    padding: 0 10px 0 10px;
+}
+
+.topnav-menu>.topnav-menu-item:hover {
+    background-color: rgba(139, 6, 6, 0.973);
 }
 
 /*Site content*/

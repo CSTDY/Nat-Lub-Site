@@ -1,6 +1,10 @@
 <?php 
     include_once('Classes/Admin-func.php');
     $content = new Site_functions;
+    session_start();
+    if(!isset($_SESSION['logged_Admin']) && !$_SESSION['logged_Admin']) {
+        header('location: index.php');
+    }
 ?>
 
 <!DOCTYPE html>

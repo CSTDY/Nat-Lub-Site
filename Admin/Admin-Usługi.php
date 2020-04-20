@@ -41,12 +41,12 @@
                         <div id="Form_edit">
                             <h3>Edytuj treść</h3>
                             <form class="Content_form" action="" method="POST">
-                                <input id="row_id" name="row_id" style="display: none;">
                                 <select name="section">
                                     <?php
                                         $content->Draw_Values('section');
                                     ?>
                                 </select>
+                                <input id="row_id" name="row_id" style="display: none;">
                                 </br>
                                 <textarea type="text" name="Services_content"
                                     placeholder="Treść"></textarea></br>

@@ -298,22 +298,22 @@ function Save_Changes($table_name, $btn_name) {
     if($btn_name == "Save_Changes") {
         $this->sql_Edit = "INSERT INTO $table_name (section, content, price) VALUES ('".$_POST["section"]."', '".$_POST["Services_content"]."'
         , '".$_POST["price"]."')";
-        $this->Edition($btn_name);
+        $this->Edition();
     }
     if($btn_name == "Save_Edition") {
         $this->sql_Edit = "UPDATE $table_name SET section='".$_POST['section']."', content='".$_POST['Services_content']."', 
         price = '".$_POST['price']."' WHERE id ='".$_POST['row_id']."'";
-        $this->Edition($btn_name);
+        $this->Edition();
     }
     if($btn_name == "Save_Section") {
         $this->sql_Edit = "INSERT INTO $table_name VALUES (NULL, '".$_POST['New_section']."', '".$_POST['New_subsection']."', 
         '".$_POST['Services_content']."', '".$_POST['price']."')";
-        $this->Edition($btn_name); 
+        $this->Edition(); 
     }
     
 }
 
-private function Edition($btn_name) {
+private function Edition() {
     include("Connect-path.php");
     try {
         $conn = new PDO("mysql:host=$host;dbname=$db_name", $db_user, $db_password);
@@ -329,8 +329,8 @@ private function Edition($btn_name) {
     catch(PDOException $e) {
         echo $e->getMessage();
     }
+    $conn = null;
 }
-
 
 }
 
@@ -372,7 +372,7 @@ class EditButtons extends RecursiveIteratorIterator {
         <form method='POST'>
         <input type='text' name='Uslugi_edit' id='Edit_".parent::current()."' value='".parent::current()."' style='display: none;'>
         <input style='font-size: 0.8em;' type='button' value='Edytuj".parent::current()."' onclick='Show_block(\"Form_edit\");
-         Hide_block(\"Form_add\"); Hide_block(\"Form_add_section\"); Download_ID(\"Edit_".parent::current()."\", \"row_id\");' name='Uslugi_Edit_btn'>
+         Hide_block(\"Form_add\"); Hide_block(\"Form_add_section\"); Download_ID(\"Edit_".parent::current()."\", \"row_id\", \"tit\");' name='Uslugi_Edit_btn'>
          </form>
          <form method='POST'>
          <input type='text' name='Uslugi_del' value='".parent::current()."' style='display: none;'>
@@ -399,3 +399,4 @@ class SelectValues extends RecursiveIteratorIterator {
         return "<option>".parent::current()."</option>";
     }
 }
+
