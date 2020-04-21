@@ -29,16 +29,19 @@ function Get_columns_names($table_name, $Section_name) {
     if($Section_name == "Uslugi") {
         $this->Checker_Uslugi = true;
         $this->sql_id = "SELECT id FROM $table_name";
+        $this->sql = "SELECT * FROM $table_name";
     }
     if($Section_name == "O_sobie") {
         $this->Checker_O_sobie = true;
         $this->sql_id = "SELECT id FROM $table_name";
+        $this->sql = "SELECT * FROM $table_name";
     }
     if($Section_name == "Glowna") {
         $this->Checker_Glowna = true;
+        $this->sql_id = "SELECT id FROM $table_name";
+        $this->sql = "SELECT id, name, create_at FROM $table_name";
     }
     $this->sql_col_names = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '$table_name' ORDER BY ORDINAL_POSITION";
-    $this->sql = "SELECT * FROM $table_name";
 }
 
 private function Draw_table($Column_names, $Column_values) {
@@ -53,9 +56,31 @@ private function Draw_table($Column_names, $Column_values) {
     echo "</table>";
 }
 
-private function Draw_Edit_Buttons($Column_values) {
+//Draw Admin Users table
+
+private function Draw_Admin_Users_table($Column_values) {
+    echo "<table style='border: solid 1px black;'>
+    <th>id</th><th>User</th><th>Stworzony w dniu</th>";
+    foreach(new TableRows(new RecursiveArrayIterator($Column_values->fetchAll())) as $k=>$v) {
+        echo $v;
+    }
+    echo "</table>";
+
+
+}
+
+private function Draw_Edit_Buttons_Services($Column_values) {
     echo "<table style='border: solid 1px black;'><th>btn</th>";
-    foreach(new EditButtons(new RecursiveArrayIterator($Column_values->fetchAll())) as $k=>$v) {
+    foreach(new EditButtons_Services(new RecursiveArrayIterator($Column_values->fetchAll())) as $k=>$v) {
+        echo $v;
+    }
+
+    echo "</table>";
+}
+
+private function Draw_Edit_Buttons_Admin($Column_values) {
+    echo "<table style='border: solid 1px black;'><th>btn</th>";
+    foreach(new EditButtons_Admin(new RecursiveArrayIterator($Column_values->fetchAll())) as $k=>$v) {
         echo $v;
     }
 
@@ -123,7 +148,7 @@ function get_result() {
             $stmt_col_names->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $this->Draw_table($stmt_col_names, $stmt);
-            $this->Draw_Edit_Buttons($stmt_id);
+            $this->Draw_Edit_Buttons_Services($stmt_id);
         }
 
         //O sobie
@@ -137,9 +162,12 @@ function get_result() {
         //Główna
         if($this->Checker_Glowna) {
             $this->Checker_Glowna = false;
-            $stmt_col_names->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt_id = $conn->prepare($this->sql_id);
+            $stmt_id->execute();
+            $stmt_id->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $this->Draw_table($stmt_col_names, $stmt);
+            $this->Draw_Admin_Users_table($stmt);
+            $this->Draw_Edit_Buttons_Admin($stmt_id);
         }
     }
     catch(Exception $e) {
@@ -260,6 +288,12 @@ function Call_Delete($table_name, $btn_name) {
     if($btn_name == "delete_service") {
         $this->sql_Delete = "DELETE FROM $table_name WHERE id = '". $_POST["Uslugi_del"]."'";
         $this->Delete($btn_name);
+        echo "Usługa została usunięta";
+    }
+    if($btn_name == "delete_Admin") {
+        $this->sql_Delete = "DELETE FROM $table_name WHERE id = '". $_POST["Admin_del"]."'";
+        $this->Delete($btn_name);
+        echo "Admin został usunięty";
     }
 }
 
@@ -281,9 +315,6 @@ private function Delete($btn_name) {
             unlink($file_dir.$_POST['content']);
             echo "Plik usunięty pomyślnie";
         }
-        if($btn_name == "delete_service") {
-            echo "Usługa została usunięta";
-        }
         
     }
     catch(PDOException $e) {
@@ -299,18 +330,48 @@ function Save_Changes($table_name, $btn_name) {
         $this->sql_Edit = "INSERT INTO $table_name (section, content, price) VALUES ('".$_POST["section"]."', '".$_POST["Services_content"]."'
         , '".$_POST["price"]."')";
         $this->Edition();
+        echo "Dodano nową usługę";
     }
     if($btn_name == "Save_Edition") {
         $this->sql_Edit = "UPDATE $table_name SET section='".$_POST['section']."', content='".$_POST['Services_content']."', 
         price = '".$_POST['price']."' WHERE id ='".$_POST['row_id']."'";
         $this->Edition();
+        echo "Zapisano zmiany";
     }
     if($btn_name == "Save_Section") {
         $this->sql_Edit = "INSERT INTO $table_name VALUES (NULL, '".$_POST['New_section']."', '".$_POST['New_subsection']."', 
         '".$_POST['Services_content']."', '".$_POST['price']."')";
         $this->Edition(); 
+        echo "Dodano nową sekcję";
     }
-    
+    //Admin
+    if($btn_name == "Add_Admin") {
+        if(isset($_POST['New_Admin']) && $_POST['New_Admin'] && isset($_POST['New_Admin_pass']) && $_POST['New_Admin_pass']) {
+            $haslo_hash = password_hash($_POST['New_Admin_pass'], PASSWORD_DEFAULT);
+            $this->sql_Edit = "INSERT INTO $table_name (`name`, `pass`) 
+            SELECT \"".$_POST['New_Admin']."\", \"$haslo_hash\" FROM $table_name WHERE NOT EXISTS (SELECT * FROM $table_name WHERE name= \"".$_POST['New_Admin']."\" LIMIT 1) ";
+            $this->Edition(); 
+        }
+        else {
+            echo "Hasło i Nazwa użytkownika jest wymagana";
+        }
+    }
+    if($btn_name == "Edit_Admin") {
+        if(isset($_POST['New_Admin']) && $_POST['New_Admin']) {
+            $this->sql_Edit = "UPDATE $table_name SET name='".$_POST['New_Admin']."' WHERE id ='".$_POST['num']."'";
+            $this->Edition();
+            echo "Zmiana nazwy użytkownika przebiegła pomyślnie ";
+        }
+        if(isset($_POST['New_Admin_pass']) && $_POST['New_Admin_pass']) {
+            $haslo_hash = password_hash($_POST['New_Admin_pass'], PASSWORD_DEFAULT);
+            $this->sql_Edit = "UPDATE $table_name SET pass='".$haslo_hash."' WHERE id ='".$_POST['num']."'";
+            $this->Edition();
+            echo "Zmiana hasła użytkownika przebiegła pomyślnie ";
+        }
+        else {
+            echo "coś poszło nie tak... Spróbuj później";
+        }
+    }
 }
 
 private function Edition() {
@@ -324,7 +385,6 @@ private function Edition() {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $stmt = $conn->prepare($this->sql_Edit);
         $stmt->execute();
-        echo "Dodano nową usługę";
     }
     catch(PDOException $e) {
         echo $e->getMessage();
@@ -362,7 +422,7 @@ class TableColumnNames extends RecursiveIteratorIterator {
     }
 }
 
-class EditButtons extends RecursiveIteratorIterator {
+class EditButtons_Services extends RecursiveIteratorIterator {
     function __construct($it) {
         parent::__construct($it, self::LEAVES_ONLY);
     }
@@ -372,11 +432,40 @@ class EditButtons extends RecursiveIteratorIterator {
         <form method='POST'>
         <input type='text' name='Uslugi_edit' id='Edit_".parent::current()."' value='".parent::current()."' style='display: none;'>
         <input style='font-size: 0.8em;' type='button' value='Edytuj".parent::current()."' onclick='Show_block(\"Form_edit\");
-         Hide_block(\"Form_add\"); Hide_block(\"Form_add_section\"); Download_ID(\"Edit_".parent::current()."\", \"row_id\", \"tit\");' name='Uslugi_Edit_btn'>
+         Hide_block(\"Form_add\"); Hide_block(\"Form_add_section\"); Download_ID(\"Edit_".parent::current()."\", \"row_id\");' name='Uslugi_Edit_btn'>
          </form>
          <form method='POST'>
          <input type='text' name='Uslugi_del' value='".parent::current()."' style='display: none;'>
          <input type='submit' name='delete_service' value='Usuń ".parent::current()."'>
+         </form>
+         </td>";
+    }
+
+    function beginChildren() {
+        echo "<tr>";
+    }
+
+    function endChildren() {
+        echo "</tr>" . "\n";
+    }
+}
+
+class EditButtons_Admin extends RecursiveIteratorIterator {
+    function __construct($it) {
+        parent::__construct($it, self::LEAVES_ONLY);
+    }
+
+    function current() {
+        return "<td style='border: 1px solid black; padding: 6px 6px 6px 6px; text-align: center; display:inline-flex;'>
+        <form method='POST'>
+        <input type='text' name='Admin_edit' id='Edit_Admin".parent::current()."' value='".parent::current()."' style='display: none;'>
+        <input style='font-size: 0.8em;' type='button' value='Edytuj".parent::current()."' onclick='Show_block(\"Admin_form_edit\");
+        Hide_block(\"Admin_form_add\"); Download_ID(\"Edit_Admin".parent::current().
+        "\", \"row_id\");' name='Admin_Edit_btn'>
+         </form>
+         <form method='POST'>
+         <input type='text' name='Admin_del' value='".parent::current()."' style='display: none;'>
+         <input type='submit' name='delete_Admin' value='Usuń ".parent::current()."'>
          </form>
          </td>";
     }

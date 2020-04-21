@@ -90,17 +90,8 @@ footer>p {
     margin: 50px 0 0 0;
 }
 
-/*Add work and Add new service section*/
-
-.grid-box {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-gap: 15px;
-}
-
-.box {
-    border: 2px double rgba(56, 55, 55, 0.973);
-    padding: 0 15px 50px 15px;
+#Admin_form_add, #Admin_form_edit, #Form_edit, #Form_add, #Form_add_section {
+    display: none;
 }
 
 /*Table box In (Uslugi, O_sobie)*/
@@ -211,18 +202,6 @@ footer>p {
     font-size: 1em;
     padding: 10px 10px 10px 10px;
     resize: none;
-}
-
-#Form_edit {
-    display: none;
-}
-
-#Form_add {
-    display: none;
-}
-
-#Form_add_section {
-    display: none;
 }
 
 /*TABLETS AND PHONES*/

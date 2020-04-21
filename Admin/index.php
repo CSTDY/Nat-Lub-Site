@@ -7,27 +7,34 @@
         
         $AdminName = mysqli_real_escape_string($db,$_POST['Admin']);
         $password = mysqli_real_escape_string($db,$_POST['pass']); 
+
+        $AdminName = htmlentities($AdminName, ENT_QUOTES, "UTF-8"); 
         
-        $sql = "SELECT id FROM admins WHERE name = '$AdminName' and pass = '$password'";
-        $result = mysqli_query($db,$sql);
-        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+        $sql = "SELECT * FROM admins WHERE BINARY name = '$AdminName'";
+        if($result = $db->query(sprintf($sql, mysqli_real_escape_string($db, $AdminName)))) {
+            $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+            $count = mysqli_num_rows($result);
         
-        $count = mysqli_num_rows($result);
-        
-        // If result matched $AdminName and $password, table row must be 1 row
-          
-        if($count == 1) {
-           $_SESSION['logged_Admin'] = $AdminName;
-           
-           header("location: Admin-site.php");
-        }else {
-           echo $error = "Your Login Name or Password is invalid";
-        }
-        mysqli_close($db);
-     }
-     if(isset($_SESSION['logged_Admin']) && $_SESSION['logged_Admin']) {
-         header('location: Admin-site.php');
-     }
+            // If result matched $AdminName and $password, table row must be 1 row
+              
+            if($count == 1) {
+                if(password_verify($password, $row['pass'])) {
+                    $_SESSION['logged_Admin'] = $AdminName;
+                    mysqli_close($db);    
+                    header("location: Admin-site.php");
+                }
+            }else {
+               echo $error = "Your Login Name or Password is invalid";
+            }
+            mysqli_close($db);
+            }
+            
+    }
+    //Redirect to Admin main page if Admin is logged
+    if(isset($_SESSION['logged_Admin']) && $_SESSION['logged_Admin']) {
+        header('location: Admin-site.php');
+    }
+       
 ?>
 <!DOCTYPE html>
 <html lang="pl">

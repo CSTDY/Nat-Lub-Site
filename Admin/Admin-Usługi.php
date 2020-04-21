@@ -1,6 +1,5 @@
 <?php
     include_once('Admin-Includes/Admin-Header-section.php');
-    $Service_id;
     if(isset($_POST['delete_service'])) {
         $content->Call_Delete("services", "delete_service");
     }
