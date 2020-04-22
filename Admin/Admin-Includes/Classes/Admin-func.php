@@ -327,22 +327,39 @@ private function Delete($btn_name) {
 
 function Save_Changes($table_name, $btn_name) {
     if($btn_name == "Save_Changes") {
-        $this->sql_Edit = "INSERT INTO $table_name (section, content, price) VALUES ('".$_POST["section"]."', '".$_POST["Services_content"]."'
-        , '".$_POST["price"]."')";
-        $this->Edition();
-        echo "Dodano nową usługę";
+        if(!isset($_POST['section']) || !isset($_POST['Services_content']) || !isset($_POST['price'])) {
+            echo "Musisz wypełnić wszystkie pola ";
+        }
+        else {
+            $this->sql_Edit = "INSERT INTO $table_name (section, content, price) VALUES ('".$_POST["section"]."', '".$_POST["Services_content"]."'
+            , '".$_POST["price"]."')";
+            $this->Edition();
+        }
     }
     if($btn_name == "Save_Edition") {
-        $this->sql_Edit = "UPDATE $table_name SET section='".$_POST['section']."', content='".$_POST['Services_content']."', 
-        price = '".$_POST['price']."' WHERE id ='".$_POST['row_id']."'";
-        $this->Edition();
-        echo "Zapisano zmiany";
+        if(isset($_POST['section']) && $_POST['section']) {
+            $this->sql_Edit = "UPDATE $table_name SET section='".$_POST['section']."' WHERE id ='".$_POST['row_id']."'";
+            $this->Edition();
+        }
+        if(isset($_POST['Services_content']) && $_POST['Services_content']) {
+            $this->sql_Edit = "UPDATE $table_name SET content='".$_POST['Services_content']."' WHERE id ='".$_POST['row_id']."'";
+            $this->Edition();
+        }
+        if(isset($_POST['price']) && $_POST['price']) {
+            $this->sql_Edit = "UPDATE $table_name SET price = '".$_POST['price']."' WHERE id ='".$_POST['row_id']."'";
+            $this->Edition();
+        }
     }
     if($btn_name == "Save_Section") {
-        $this->sql_Edit = "INSERT INTO $table_name VALUES (NULL, '".$_POST['New_section']."', '".$_POST['New_subsection']."', 
-        '".$_POST['Services_content']."', '".$_POST['price']."')";
-        $this->Edition(); 
-        echo "Dodano nową sekcję";
+        if(!isset($_POST['New_section']) || !isset($_POST['New_subsection']) || !isset($_POST['Services_content']) || !isset($_POST['price'])) {
+            echo "Wszystkie pola są wymagane!";         
+        }
+        else {
+            $this->sql_Edit = "INSERT INTO $table_name VALUES (NULL, '".$_POST['New_section']."', '".$_POST['New_subsection']."', 
+            '".$_POST['Services_content']."', '".$_POST['price']."')";
+            $this->Edition(); 
+            echo "Dodano nową sekcję";
+        }
     }
     //Admin
     if($btn_name == "Add_Admin") {
@@ -370,6 +387,20 @@ function Save_Changes($table_name, $btn_name) {
         }
         else {
             echo "coś poszło nie tak... Spróbuj później";
+        }
+    }
+    //O sobie
+    if($btn_name == "O_Sobie_edit_sub") {
+        if(isset($_POST['O_Sobie_header']) && $_POST['O_Sobie_header']) {
+            $this->sql_Edit = "UPDATE $table_name SET header='".$_POST['O_Sobie_header']."' WHERE id = 1";
+            $this->Edition();
+        }
+        if(isset($_POST['O_Sobie_content']) && $_POST['O_Sobie_content']) {
+            $this->sql_Edit = "UPDATE $table_name SET tekst='".$_POST['O_Sobie_content']."' WHERE id = 1";
+            $this->Edition();
+        }
+        else {
+            echo "Nie dokonałeś żadnych zmian";
         }
     }
 }
@@ -400,7 +431,7 @@ class TableRows extends RecursiveIteratorIterator {
     }
 
     function current() {
-        return "<td style='width: 150px; border: 1px solid black;'>" . parent::current(). "</td>";
+        return "<td style=' padding: 5px 10px 5px 10px; border: 1px solid black; text-align: center;'>" . parent::current(). "</td>";
     }
 
     function beginChildren() {
