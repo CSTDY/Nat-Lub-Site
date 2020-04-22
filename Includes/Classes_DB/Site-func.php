@@ -1,10 +1,7 @@
 <?php 
-define ('PROJECTS_PATH', 'C:/xampp/htdocs/Nat-Lub-Site/Admin/Admin-Includes/Classes/Prace-img/');
-define('BASE_URL', 'http://localhost/Nat_Lub_Site/');
 class Upload_content {
 
     private $sql;
-    private $sql_extra;
     private $checker_Uslugi = false;   //bool function, check if Uslugi(x) function is called
     private $checker_O_sobie = false;  //bool function, check if O_sobie(x) function is called
     private $checker_Prace = false;
@@ -119,7 +116,7 @@ class Upload_content {
                 while($row = $query->fetch_assoc()) {
                     $imageURL = "Admin/Admin-Includes/Classes/Prace-img/".$row['images'];
                     ?>
-            <div class="image">
+            <div class="project_photo">
                 <a href="#">
                     <img src="<?php echo $imageURL; ?>" alt="Imidź" /></br>
                 </a>
@@ -147,8 +144,5 @@ class TableRows extends RecursiveIteratorIterator {
     function current() {
         return parent::current();
     }
-    
-    
-
 }
 

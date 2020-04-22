@@ -157,7 +157,6 @@ footer>p {
 
 .project_photo {
     position: relative;
-    height: inherit;
     height: 250px;
     border: 1px dotted black;
 }
@@ -211,5 +210,35 @@ footer>p {
     .grid-box {
         display: grid;
         grid-template-columns: auto;
+    }
+}
+
+@media (max-width: 800px) {
+    /*TopNav*/
+    #Desktop_Menu {
+        display: none;
+    }
+    #Mobile_Menu {
+        display: block;
+    }
+    #Mobile_Menu>a {
+        font-size: 1.2em;
+        color: blanchedalmond;
+    }
+    
+    .flex-nav ul {
+        display: none;
+    }
+
+    .flex-nav ul.open {
+        display: grid;
+        list-style-type: none;
+    }
+    .flex-nav li>a {
+        color: blanchedalmond;
+    }
+    /****/
+    .width1 { 
+        width: 100%;
     }
 }

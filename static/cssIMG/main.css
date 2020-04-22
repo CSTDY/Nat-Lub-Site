@@ -65,27 +65,8 @@ footer>p {
     height: auto;
 }
 
-
-.right {
-    text-align: right;
-}
-
-.flag-img {
-    width: 30px;
-    height: 30px;
-    margin: 10px 5px;
-    display: inline-block;
-    text-align: right;
-}
-
-#UK {
-    background-image: url("images/ukraine.png");
-    background-size: cover;
-}
-
-#PL {
-    background-image: url("images/poland.png");
-    background-size: cover;
+.height1 {
+    height: 50px;
 }
 
 /*LOGO*/
@@ -164,36 +145,30 @@ footer>p {
 
 /*posted images at 'Uslugi.php' and "Prace.php*/
 
-.images-container {
-    display: inline-grid;
-    grid-template-columns: auto auto auto;
-    grid-gap: 10px;
-    border: 2px double rgba(167, 0, 22, 0.747);
-    margin: 50px 5% 0 0;
-    padding: 5%;
-}
-
-.image {
-    overflow: hidden;
-    position: relative;
-    border: 5px solid rgb(252, 254, 255);
-}
-
-.image img {
-    max-width: 100%;
-    vertical-align: middle;
-}
-
-.image .content {
-    position: absolute;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.3);
+.img_box {
+    margin: 50px 0 0 0;
     width: 100%;
+    height: auto;
 }
 
-.content {
-    color: rgba(243, 241, 241, 0.89);
+.images  {
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px dotted black;
 }
+
+.project_photo {
+    height: inherit;
+    height: 250px;
+}
+
+.project_photo>a>img {
+    width: 350px;
+    padding: 15px 15px 35px 15px;
+    height: 250px;
+    background-size: cover;
+}
+
 
 /*Kontakt.php */
 
@@ -230,7 +205,7 @@ form>.form-message {
 
 form>.form-submit-btn {
     height: 30px;
-    background-color: rgba(99, 78, 87, 0.651);
+    background--bg: rgba(99, 78, 87, 0.651);
     text-align: center;
 }
 
@@ -262,6 +237,10 @@ form>.form-submit-btn {
 }
 
 /*MOBILE AND TABLET*/
+
+#Mobile_Menu {
+    display: none;
+}
 
 @media (max-width: 1124px) {
     /*Prace.php*/
@@ -305,5 +284,31 @@ form>.form-submit-btn {
     .logo-img {
         width: 150px;
         margin: 8px 0 0 0;
+    }
+    #Desktop_Menu {
+        display: none;
+    }
+    #Mobile_Menu {
+        display: block;
+    }
+    #Mobile_Menu>a {
+        font-size: 1.2em;
+        color: blanchedalmond;
+    }
+    
+    .flex-nav ul {
+        display: none;
+    }
+
+    .flex-nav ul.open {
+        display: grid;
+        list-style-type: none;
+    }
+    .flex-nav li>a {
+        color: blanchedalmond;
+    }
+
+    .width1, .project_photo>a>img { 
+        width: 100%;
     }
 }

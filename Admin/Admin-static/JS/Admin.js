@@ -22,3 +22,11 @@ function Download_ID(id, target) {
     var val = document.getElementById(id).value;
     document.getElementById(target).value = val;
 }
+
+/*MOBILE DEVICES */
+
+$(document).ready(function(){
+    $(".phone-nav").click(function(){
+        $(".flex-nav ul").toggleClass('open');
+    });
+  });

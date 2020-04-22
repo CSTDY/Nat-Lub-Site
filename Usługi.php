@@ -30,9 +30,9 @@
     <!--Container END-->
     </div>
     </div>
-    <footer>
-        <p>&copy Natalia Lubenets Twój Kosmetolog <?php echo date('Y'); ?></p>
-    </footer>
+    <?php
+        include_once('Includes/Footer.php');
+    ?>
 </body>
 
 </html>

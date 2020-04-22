@@ -1,3 +1,9 @@
+/* */
+$(document).ready(function(){
+    $(".phone-nav").click(function(){
+        $(".flex-nav ul").toggleClass('open');
+    });
+});
 /*SLIDER index.php*/
 var myIndex = 0;
 slajd_change();
@@ -34,4 +40,3 @@ function showDivs(n) {
   x[myIndex-1].style.display = "block"; 
 }
 
-/* */
