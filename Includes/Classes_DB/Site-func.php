@@ -1,4 +1,4 @@
-<?php 
+<?php /**/
 class Upload_content {
 
     private $sql;
