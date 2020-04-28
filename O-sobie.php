@@ -18,12 +18,6 @@ include_once("Includes/Head-section.php");
                     ?>
                 </div>
             </div>
-            <!--Reklama-->
-            <div class="width1">
-                <div class="ads">
-                    Reklama
-                </div>
-            </div>
         </div>
     </div>
     <?php

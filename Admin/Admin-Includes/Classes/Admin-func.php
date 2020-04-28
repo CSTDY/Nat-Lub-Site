@@ -234,8 +234,8 @@ function upload_img() {
     // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            $sq = 'INSERT INTO projects(images) VALUES ("'.$_FILES["fileToUpload"]["name"].'")';  
-            if ($conn->query($sq) === TRUE) {
+            $sql = 'INSERT INTO projects(images) VALUES ("'.$_FILES["fileToUpload"]["name"].'")';  
+            if ($conn->query($sql) === TRUE) {
                 echo "Plik ". basename( $_FILES["fileToUpload"]["name"]). " został przesłany pomyślnie.";
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;

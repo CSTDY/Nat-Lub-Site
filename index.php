@@ -11,8 +11,7 @@
     include_once("Includes/Logo-section.php");
     ?>
             <!--SLIDER-->
-            <div class="width1">
-                <div class="border1 slajdy">
+                <div class="slajdy">
                     <!--Załadowanie funkcją max 10 ostatnich publikacji-->
                     <?php
                     include('Includes/Classes_DB/Connect-path.php');
@@ -39,13 +38,6 @@
                     $conn->close();}
                     ?>
                 </div>
-            </div>
-            <!--Reklama-->
-            <div class="width1">
-                <div class="ads">
-                    Reklama
-                </div>
-            </div>
             <!--Container END-->
         </div>
     </div>

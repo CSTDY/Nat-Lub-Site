@@ -116,7 +116,7 @@ class Upload_content {
                 while($row = $query->fetch_assoc()) {
                     $imageURL = "Admin/Admin-Includes/Classes/Prace-img/".$row['images'];
                     ?>
-            <div class="project_photo">
+            <div id="img<?php echo $row['id'];?>" class="project_photo">
                 <a href="#">
                     <img src="<?php echo $imageURL; ?>" alt="Imidź" /></br>
                 </a>

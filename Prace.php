@@ -20,12 +20,6 @@
                 </div>
             </div>
         </div>
-        <!--Reklama-->
-        <div class="width1">
-            <div class="ads">
-                Reklama
-            </div>
-        </div>
         <!--Container END-->
     </div>
     </div>

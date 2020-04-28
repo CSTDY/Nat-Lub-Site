@@ -12,7 +12,7 @@
     </figure>
 </div>
 <div class="logo-gold"></div>
-<div class="color-bg">
+<div class="color-bg merg1">
     <div class="width1">
         <nav id="Desktop_Menu" class="topnav">
             <a class="link" href="Kontakt.php">Kontakt</a>

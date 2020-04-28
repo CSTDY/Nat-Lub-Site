@@ -32,6 +32,10 @@ ul {
     font-size: 1.2em;
 }
 
+.merg1 {
+    margin: 0 0 50px 0;
+}
+
 /*Positioning footer at the bottom*/
 .container {
     min-height: 100%;
@@ -124,12 +128,20 @@ footer>p {
 
 
 .slajdy{
+    margin: 0 auto;
+    width: 650px;
     display: flex;
     justify-content: center;
+    max-height: 450px;
+    min-height: 450px;
 }
 
-.slajd-img {
+.slajd-img  {
     animation: 1s ease-out 1 show_image;
+    min-height: 450px;
+    max-height: 450px;
+    min-width: 650px;
+    max-width: 650px;
     object-fit: cover;
 }
 
@@ -154,19 +166,14 @@ footer>p {
 .images  {
     display: flex;
     flex-wrap: wrap;
-    border: 2px dotted black;
+    border: 2px double rgba(167, 0, 22, 0.747);
 }
 
-.project_photo {
-    height: inherit;
-    height: 250px;
-}
-
-.project_photo>a>img {
+.project_photo img {
     width: 350px;
     padding: 15px 15px 35px 15px;
     height: 250px;
-    background-size: cover;
+    object-fit: cover;
 }
 
 
@@ -205,7 +212,7 @@ form>.form-message {
 
 form>.form-submit-btn {
     height: 30px;
-    background--bg: rgba(99, 78, 87, 0.651);
+    background: rgba(99, 78, 87, 0.651);
     text-align: center;
 }
 
@@ -228,13 +235,6 @@ form>.form-submit-btn {
     text-align: center;
 }
 
-/*Reklamy*/
-
-.ads {
-    display: flex;
-    justify-content: center;
-    margin: 25px 0 0 0;
-}
 
 /*MOBILE AND TABLET*/
 
@@ -270,8 +270,24 @@ form>.form-submit-btn {
 }
 
 @media (max-width: 800px) {
-    .images-container {
-        grid-template-columns: auto;
+
+    .width1 {
+        width: 100%;
+        margin: 0;
+    }
+
+    .border1 {
+        margin: 0;
+    }
+    /*Prace.php*/        
+    .project_photo {
+        min-width: 100%;
+        min-height: 250px;
+        max-height: 250px;
+    }
+
+    .project_photo img {
+        width: 100%;
     }
     /*LOGO*/
     .flex-logo {
@@ -311,4 +327,22 @@ form>.form-submit-btn {
     .width1, .project_photo>a>img { 
         width: 100%;
     }
+
+    /*Slajdy*/
+    .slajdy{
+        margin: 0 auto;
+        width: 100%;
+        max-height: 250px;
+        min-height: 250px;
+        padding: 0 10px 0 10px;
+    }
+    
+    .slajd-img  {
+        min-height: 250px;
+        max-height: 250px;
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+
 }
